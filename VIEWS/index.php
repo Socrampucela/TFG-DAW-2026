@@ -1,14 +1,28 @@
 <?php
 require_once '../CONFIG/db.php';
+require_once '../CLASSES/usuario.php';
+require_once '../DAO/usuarioDAO.php';
 
-$sql = "SELECT * FROM `ofertas_de_empleo` ORDER BY `ofertas_de_empleo`.`Fecha publicación` ASC LIMIT 10";
-$resultado = $conn->query($sql);
+echo "<h2>Prueba de Sistema</h2>";
 
-if ($resultado->num_rows > 0) {
-    while($row = $resultado->fetch_assoc()) {
-        echo "<h3>" . $row['Título'] . "</h3>";
-         echo "<h3>" . $row['Provincia'] . "</h3>";
+try {
+    // 1. Probar Conexión
+    if ($conn) {
+        echo "✅ Conexión PDO establecida con éxito.<br>";
     }
-} else {
-    echo "No hay datos.";
+
+    // 2. Probar DAO
+    $usuarioDAO = new UsuarioDAO($conn);
+    $emailPrueba = 'usuarioPrueba@gmail.com';
+    
+    $resultado = $usuarioDAO->buscarPorEmail($emailPrueba);
+
+    if ($resultado) {
+        echo "✅ Usuario encontrado: " . $resultado->getNombreApellidos();
+    } else {
+        echo "ℹ️ El email $emailPrueba no existe en la base de datos (esto no es un error).";
+    }
+
+} catch (Exception $e) {
+    echo "❌ Error en la prueba: " . $e->getMessage();
 }

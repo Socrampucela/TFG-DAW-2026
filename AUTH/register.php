@@ -1,42 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="ASSETS/css/register.css">
+
+    <!-- Tailwind CDN (solo utilidades, sin estilos propios) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS del proyecto -->
+    <link rel="stylesheet" href="/TFG-DAW-2026/ASSETS/css/components.css">
+    <link rel="stylesheet" href="/TFG-DAW-2026/ASSETS/css/register.css">
+
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-<body>
-    <h1>Regístrate</h1>
-    <form action="procesarRegistro.php" method="post">
-        <div>
-            <label for="nombre">Nombre y apellidos</label><br>
-            <input type="text" id="nombre" name="nombre" required>
-        </div>
 
-        <div>
-            <label for="email">Correo electrónico</label><br>
-            <input type="email" id="email" name="email" required>
-        </div>
+<body class="min-h-screen flex items-center justify-center">
+    
+    <main class="w-full flex justify-center">
+        <section class="register-container">
+            <h1>Regístrate</h1>
 
-        <div>
-            <label for="password">Contraseña</label><br>
-            <input type="password" id="password" name="password" required>
-        </div>
+            <form action="procesarRegistro.php" method="post">
+                <div>
+                    <label for="nombre">Nombre y apellidos</label><br>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
 
-        <div>
-            <label for="password2">Repetir contraseña</label><br>
-            <input type="password" id="password2" name="password2" required>
-        </div>
+                <div>
+                    <label for="email">Correo electrónico</label><br>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-        <div>
-            <label>
-                <input type="checkbox" name="condiciones" required>
-                Acepto los términos y condiciones
-            </label>
-        </div>
+                <div>
+                    <label for="password">Contraseña</label><br>
+                    <input type="password" id="password" name="password" required>
+                </div>
 
-        <button type="submit">Registrarse</button>
-    </form>
+                <div>
+                    <label for="password2">Repetir contraseña</label><br>
+                    <input type="password" id="password2" name="password2" required>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" name="condiciones" required>
+                        Acepto los términos y condiciones
+                    </label>
+                </div>
+
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+
+                <button type="submit">Registrarse</button>
+            </form>
+        </section>
+    </main>
+
 </body>
 </html>

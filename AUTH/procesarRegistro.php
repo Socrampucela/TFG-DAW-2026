@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
 
         if ($resultado) {
-            header("Location: ../login.php?registro=exito");
+            header("Location: login.php?registro=exito");
             exit(); // Siempre pon exit() después de un header Location
         }
         

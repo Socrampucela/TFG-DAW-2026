@@ -9,8 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- CSS del proyecto -->
-    <link rel="stylesheet" href="/TFG-DAW-2026/ASSETS/css/components.css">
-    <link rel="stylesheet" href="/TFG-DAW-2026/ASSETS/css/register.css">
+    <link rel="stylesheet" href="/TFG-DAW-2026/TFG-DAW-2026/ASSETS/css/components.css">
+    <link rel="stylesheet" href="/TFG-DAW-2026/TFG-DAW-2026/ASSETS/css/register.css">
+
 
     <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

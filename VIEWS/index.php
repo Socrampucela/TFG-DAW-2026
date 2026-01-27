@@ -1,28 +1,14 @@
 <?php
-require_once '../CONFIG/db.php';
-require_once '../CLASSES/usuario.php';
-require_once '../DAO/usuarioDAO.php';
-
-echo "<h2>Prueba de Sistema</h2>";
+echo "IP del servidor: " . $_SERVER['SERVER_ADDR'] . "<br>";
+echo "IP del cliente: " . $_SERVER['REMOTE_ADDR'] . "<br>";
 
 try {
-    // 1. Probar Conexión
-    if ($conn) {
-        echo "✅ Conexión PDO establecida con éxito.<br>";
-    }
-
-    // 2. Probar DAO
-    $usuarioDAO = new UsuarioDAO($conn);
-    $emailPrueba = 'usuarioPrueba@gmail.com';
+    $conn = new PDO("mysql:host=localhost;charset=utf8mb4", 'root', '');
+    echo "Conexión a MySQL: OK<br>";
     
-    $resultado = $usuarioDAO->buscarPorEmail($emailPrueba);
-
-    if ($resultado) {
-        echo "✅ Usuario encontrado: " . $resultado->getNombreApellidos();
-    } else {
-        echo "ℹ️ El email $emailPrueba no existe en la base de datos (esto no es un error).";
-    }
-
-} catch (Exception $e) {
-    echo "❌ Error en la prueba: " . $e->getMessage();
+    $dbs = $conn->query("SHOW DATABASES")->fetchAll(PDO::FETCH_COLUMN);
+    echo "Bases de datos: " . implode(', ', $dbs);
+    
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }

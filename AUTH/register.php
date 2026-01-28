@@ -22,6 +22,7 @@
     <main class="w-full flex justify-center">
         <section class="register-container">
             <h1>Regístrate</h1>
+            <p class="register-subtitle">Crea tu perfil y empieza a postular a ofertas.</p>
 
             <form action="procesarRegistro.php" method="post">
                 <div>
@@ -54,6 +55,10 @@
                 <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
 
                 <button type="submit">Registrarse</button>
+                <div class="register-links">
+                ¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a>
+                </div>
+
             </form>
         </section>
     </main>

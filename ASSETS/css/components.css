@@ -181,7 +181,9 @@
   color: rgba(43,47,51,.35);
 }
 
-/* Responsive: en pantallas pequeñas, apila */
+
+
+/* Responsive */
 @media (max-width: 520px){
   .site-footer__inner{
     flex-direction: column;

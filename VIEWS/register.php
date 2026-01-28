@@ -7,84 +7,75 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style type="text/tailwindcss">
-        @layer components {
-            .register-container {
-                @apply bg-white border border-gray-200 rounded-2xl shadow-2xl p-8 max-w-[520px] w-full mt-10;
-            }
-            .form-label {
-                @apply block text-sm font-semibold text-gray-700 mb-1;
-            }
-            .form-input {
-                @apply w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all mb-4;
-            }
-            .btn-primary {
-                @apply w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg mt-4;
-            }
-            .page-title {
-                @apply text-3xl font-bold tracking-tight text-gray-900 mb-2;
-            }
-            .page-subtitle {
-                @apply text-sm text-gray-500 mb-6;
-            }
-        }
-    </style>
+    <!-- CSS del proyecto -->
+    <link rel="stylesheet" href="../ASSETS/css/components.css">
+    <link rel="stylesheet" href="../ASSETS/css/register.css">
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gray-50 min-h-screen flex flex-col">
 
     <?php include("../includes/header.php"); ?>
 
-    <main class="flex justify-center items-start py-10 px-4">
-        <section class="register-container">
-            <h1 class="page-title">Regístrate</h1>
-            <p class="page-subtitle">Crea tu perfil y empieza a postular a ofertas.</p>
+    <main class="flex-grow flex justify-center items-start py-10 px-4">
+        <!-- Unificado con login: usamos panel -->
+        <section class="panel" style="width:100%; max-width:520px;">
+            <div class="panel__inner">
 
-            <form action="../AUTH/procesarRegistro.php" method="post" id="formulario">
-                <div>
-                    <label class="form-label" for="nombre">Nombre y apellidos</label>
-                    <input class="form-input" type="text" id="nombre" name="nombre" required>
-                </div>
+                <h1 class="page-title">Regístrate</h1>
+                <p class="page-subtitle">Crea tu perfil y empieza a postular a ofertas.</p>
 
-                <div>
-                    <label class="form-label" for="email">Correo electrónico</label>
-                    <input class="form-input" type="email" id="email" name="email" required>
-                </div>
+                <form class="form" action="../AUTH/procesarRegistro.php" method="post" id="formulario">
 
-                <div>
-                    <label class="form-label" for="password">Contraseña</label>
-                    <input class="form-input" type="password" id="password" name="password" required>
-                </div>
+                    <div>
+                        <label class="form-label" for="nombre">Nombre y apellidos</label>
+                        <input class="form-input" type="text" id="nombre" name="nombre" required>
+                    </div>
 
-                <div>
-                    <label class="form-label" for="password2">Repetir contraseña</label>
-                    <input class="form-input" type="password" id="password2" name="password2" required>
-                </div>
+                    <div>
+                        <label class="form-label" for="email">Correo electrónico</label>
+                        <input class="form-input" type="email" id="email" name="email" required>
+                    </div>
 
-                <div class="flex items-center gap-2 mb-6 text-sm text-gray-600">
-                    <input type="checkbox" id="condiciones" name="condiciones" required class="w-4 h-4 rounded text-blue-600">
-                    <label for="condiciones">Acepto los términos y condiciones</label>
-                </div>
+                    <div>
+                        <label class="form-label" for="password">Contraseña</label>
+                        <input class="form-input" type="password" id="password" name="password" required>
+                    </div>
 
-                <div class="mb-6 flex justify-center">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
-                </div>
+                    <div>
+                        <label class="form-label" for="password2">Repetir contraseña</label>
+                        <input class="form-input" type="password" id="password2" name="password2" required>
+                    </div>
 
-                <button class="btn-primary" type="submit">Registrarse</button>
+                    <!-- Unificado: checkbox-row del components -->
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="condiciones" name="condiciones" required>
+                        <label for="condiciones">Acepto los términos y condiciones</label>
+                    </div>
 
-                <div class="mt-6 text-center text-sm text-gray-600">
-                    ¿Ya tienes cuenta? <a href="login.php" class="text-blue-600 font-bold hover:underline">Inicia sesión</a>
-                </div>
-            </form>
-            
-            <div id="errores"></div>
-            <script src="../AUTH/comprobarRegistro.js"></script>
+                    <!-- Unificado: captcha-wrap del components -->
+                    <div class="captcha-wrap">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+                    </div>
+
+                    <button class="btn-primary" type="submit">Registrarse</button>
+
+                    <!-- Unificado: form-links del components -->
+                    <div class="form-links">
+                        ¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a>
+                    </div>
+
+                </form>
+
+                <div id="errores"></div>
+                <script src="../AUTH/comprobarRegistro.js"></script>
+
+            </div>
         </section>
-        
-
     </main>
+
+    <?php include("../includes/footer.php"); ?>
 
 </body>
 </html>

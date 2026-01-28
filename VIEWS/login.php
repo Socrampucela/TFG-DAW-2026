@@ -27,7 +27,6 @@ if (isset($_GET['error'])) {
             break;
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,110 +35,77 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
 
+    <!-- Tailwind (solo utilidades, usado aquí para alertas y layout rápido) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- CSS del proyecto -->
+    <link rel="stylesheet" href="../ASSETS/css/components.css">
+    <!-- (Opcional) si luego quieres algo específico -->
+    <!-- <link rel="stylesheet" href="../ASSETS/css/login.css"> -->
+
+    <!-- Alertas (Tailwind) -->
     <style type="text/tailwindcss">
         @layer components {
-            .login-container {
-                @apply bg-white border border-gray-200 rounded-2xl shadow-2xl p-8 max-w-[520px] w-full mt-10;
-            }
-            .form-label {
-                @apply block text-sm font-semibold text-gray-700 mb-1;
-            }
-            .form-input {
-                @apply w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all mb-4;
-            }
-            .btn-primary {
-                @apply w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg mt-4;
-            }
-            .page-title {
-                @apply text-3xl font-bold tracking-tight text-gray-900 mb-2;
-            }
-            .page-subtitle {
-                @apply text-sm text-gray-500 mb-6;
-            }
-            /* Estilos para las alertas */
-            .alert {
-                @apply p-4 mb-6 rounded-lg text-sm font-medium border;
-            }
+            .alert { @apply p-4 mb-6 rounded-lg text-sm font-medium border; }
             .alert-Exito { @apply bg-green-50 text-green-700 border-green-200; }
             .alert-Error { @apply bg-red-50 text-red-700 border-red-200; }
             .alert-Advertencia { @apply bg-yellow-50 text-yellow-700 border-yellow-200; }
         }
     </style>
 
+    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gray-50 min-h-screen flex flex-col">
 
     <?php include("../includes/header.php"); ?>
 
-    <main class="flex justify-center items-start py-10 px-4">
-        <section class="login-container">
-            
-            <h1 class="page-title">Iniciar sesión</h1>
-            <p class="page-subtitle">Accede a tu cuenta para postular a ofertas.</p>
+    <main class="flex-grow flex justify-center items-start py-10 px-4">
+        <section class="panel" style="width:100%; max-width:520px;">
+            <div class="panel__inner">
 
-            <?php if ($mensaje): ?>
-                <div id="divError" class="alert alert-<?php echo $tipo_mensaje; ?>">
-                    <strong><?php echo $tipo_mensaje; ?>:</strong> <?php echo $mensaje; ?>
-                </div>
-            <?php endif; ?>
+                <h1 class="page-title">Iniciar sesión</h1>
+                <p class="page-subtitle">Accede a tu cuenta para postular a ofertas.</p>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Iniciar sesión</title>
+                <?php if ($mensaje): ?>
+                    <div id="divError" class="alert alert-<?php echo $tipo_mensaje; ?>">
+                        <strong><?php echo $tipo_mensaje; ?>:</strong> <?php echo $mensaje; ?>
+                    </div>
+                <?php endif; ?>
 
-   <!-- CSS -->
-   <link rel="stylesheet" href="../ASSETS/css/components.css">
+                <form class="form" action="../AUTH/procesarLogin.php" method="post" id="formulario">
 
+                    <div>
+                        <label class="form-label" for="email">Correo electrónico</label>
+                        <input class="form-input" type="email" id="email" name="email" required>
+                    </div>
 
-   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-</head>
+                    <div>
+                        <label class="form-label" for="password">Contraseña</label>
+                        <input class="form-input" type="password" id="password" name="password" required>
+                    </div>
 
-<body class="page-center">
+                    <div class="captcha-wrap">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+                    </div>
 
-   <main class="w-full flex justify-center">
-      <section class="panel" style="width:100%; max-width:520px;">
-         <div class="panel__inner">
+                    <button class="btn-primary" type="submit">Iniciar sesión</button>
 
-            <h1 class="page-title">Iniciar sesión</h1>
-            <p class="page-subtitle">Accede a tu cuenta para postular a ofertas.</p>
+                    <div class="form-links">
+                        ¿No tienes cuenta? <a href="register.php">Regístrate</a>
+                    </div>
 
-            <form class="form" action="../AUTH/procesarLogin.php" method="post" id="formulario">
+                </form>
 
-               <div>
-                  <label class="form-label" for="email">Correo electrónico</label>
-                  <input class="form-input" type="email" id="email" name="email" required>
-               </div>
+                <div id="errores"></div>
+                <script src="../AUTH/comprobarRegistro.js"></script>
 
-               <div>
-                  <label class="form-label" for="password">Contraseña</label>
-                  <input class="form-input" type="password" id="password" name="password" required>
-               </div>
+            </div>
+        </section>
+    </main>
 
-               <div class="captcha-wrap">
-                  <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
-               </div>
+    <?php include("../includes/footer.php"); ?>
 
-               <button class="btn-primary" type="submit">Iniciar sesión</button>
-
-               <div class="form-links">
-                  ¿No tienes cuenta? <a href="register.php">Regístrate</a>
-               </div>
-
-            </form>
-
-
-         </div>
-      </section>
-   </main>
-<?php include '../INCLUDES/footer.php'; ?>
-
-   <script src="../AUTH/comprobarRegistro.js"></script>
 </body>
 </html>

@@ -48,7 +48,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <?php else: ?>
             <a href="login.php" class="text-gray-600 hover:text-blue-600 font-medium transition">Iniciar sesión</a>
-            <a href="register.php" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-md hover:shadow-lg">
+            <a href="register.php" class="btn-primary !w-auto inline-flex items-center justify-center">
                 Registrarse
             </a>
         <?php endif; ?>

@@ -36,10 +36,9 @@ print($tipo_mensaje . " " . $mensaje);
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Iniciar sesión</title>
 
-   <!-- CSS del proyecto -->
+   <!-- CSS -->
    <link rel="stylesheet" href="../ASSETS/css/components.css">
-   <!-- (Opcional) si luego quieres ajustar algo específico de login -->
-   <!-- <link rel="stylesheet" href="../ASSETS/css/login.css"> -->
+  
 
    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
@@ -82,6 +81,7 @@ print($tipo_mensaje . " " . $mensaje);
          </div>
       </section>
    </main>
+<?php include '../INCLUDES/footer.php'; ?>
 
    <script src="../AUTH/comprobarRegistro.js"></script>
 </body>

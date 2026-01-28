@@ -31,6 +31,7 @@
                         <input class="form-input" type="text" id="nombre" name="nombre" required>
                     </div>
             <form action="../AUTH/procesarRegistro.php" method="post" id="formulario">
+                
 
 
                     <div>

@@ -30,6 +30,11 @@
                         <label class="form-label" for="nombre">Nombre y apellidos</label>
                         <input class="form-input" type="text" id="nombre" name="nombre" required>
                     </div>
+            <form action="../AUTH/procesarRegistro.php" method="post" id="formulario">
+                <div>
+                    <label for="nombre">Nombre y apellidos</label><br>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
 
                     <div>
                         <label class="form-label" for="email">Correo electrónico</label>
@@ -61,6 +66,9 @@
                         ¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a>
                     </div>
 
+            </form>
+            <div id="errores"></div>
+            <script src="../AUTH/comprobarRegistro.js"></script>
                 </form>
             </div>
         </section>

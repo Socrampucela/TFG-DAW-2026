@@ -31,10 +31,7 @@
                         <input class="form-input" type="text" id="nombre" name="nombre" required>
                     </div>
             <form action="../AUTH/procesarRegistro.php" method="post" id="formulario">
-                <div>
-                    <label for="nombre">Nombre y apellidos</label><br>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
+
 
                     <div>
                         <label class="form-label" for="email">Correo electrónico</label>

@@ -82,6 +82,8 @@
             <div id="errores"></div>
             <script src="../AUTH/comprobarRegistro.js"></script>
         </section>
+        
+
     </main>
 
 </body>

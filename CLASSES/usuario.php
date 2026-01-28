@@ -2,15 +2,27 @@
 
 class Usuario 
 {
+    private ?int $id;
     private string $nombreApellidos;
     private string $email;
     private string $password;
 
     public function __construct(string $nombreApellidos, string $email, string $password)
     {
+        $this->id = $id;
         $this->nombreApellidos = $nombreApellidos;
         $this->email = $email;
         $this->password = $password;
+    }
+
+    public function getId(): ?int 
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void 
+    {
+        $this->id = $id;
     }
 
     public function getNombreApellidos(): string 

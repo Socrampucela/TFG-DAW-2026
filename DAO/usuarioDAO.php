@@ -1,6 +1,7 @@
 <?php
 require_once("../CONFIG/db.php");
 require_once("../CLASSES/usuario.php");
+
 class UsuarioDAO 
 {
     private PDO $conn;
@@ -12,7 +13,7 @@ class UsuarioDAO
 
     public function crear(Usuario $usuario): bool 
     {
-        $sql = "INSERT INTO usuarios (nombre_apellido, email, password) VALUES (:nombre, :email, :pass)";
+        $sql = "INSERT INTO usuarios (nombre_apellido, email, password) VALUES (:nombre_apellido, :email, :pass)";
         $stmt = $this->conn->prepare($sql);
         
         return $stmt->execute([
@@ -24,30 +25,61 @@ class UsuarioDAO
 
     public function buscarPorEmail(string $email): ?Usuario 
     {
-        $sql = "SELECT nombre_apellido, email, password FROM usuarios WHERE email = :email";
+        $sql = "SELECT id, nombre_apellido, email, password FROM usuarios WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['email' => $email]);
         
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($fila) {
-            return new Usuario($fila['nombre_apellido'], $fila['email'], $fila['password']);
+            return new Usuario(
+                $fila['nombre_apellido'], 
+                $fila['email'], 
+                $fila['password'],
+                $fila['id'] 
+            );
         }
 
         return null;
     }
-   public function buscarPorNombre(string $nombre): ?Usuario 
-{
-    $sql = "SELECT nombre_apellido, email, password FROM usuarios WHERE nombre_apellido = :nombre_apellido";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute(['nombre_apellido' => $nombre]);
     
-    $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function buscarPorNombre(string $nombre): ?Usuario 
+    {
+        $sql = "SELECT id, nombre_apellido, email, password FROM usuarios WHERE nombre_apellido = :nombre_apellido";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['nombre_apellido' => $nombre]);
+        
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($fila) {
-        return new Usuario($fila['nombre_apellido'], $fila['email'], $fila['password']);
+        if ($fila) {
+            return new Usuario(
+                $fila['nombre_apellido'], 
+                $fila['email'], 
+                $fila['password'],
+                $fila['id']  
+            );
+        }
+
+        return null;
     }
 
-    return null;
-}
+    public function buscarPorId(int $id): ?Usuario 
+    {
+        $sql = "SELECT id, nombre_apellido, email, password FROM usuarios WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($fila) {
+            return new Usuario(
+                $fila['nombre_apellido'], 
+                $fila['email'], 
+                $fila['password'],
+                $fila['id']
+            );
+        }
+
+        return null;
+    }
 }

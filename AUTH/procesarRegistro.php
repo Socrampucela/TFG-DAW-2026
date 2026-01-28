@@ -1,33 +1,24 @@
 <?php
 require_once '../config/db.php';
-
+require_once '../classes/usuario.php';
+require_once '../DAO/usuarioDAO.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
-
-    // Encriptamos la contraseña
     $pass_encriptada = password_hash($pass, PASSWORD_BCRYPT);
-
+    $usuario = new Usuario($nombre,$email,$pass_encriptada);
     try {
-        // Con PDO, usamos nombre de parámetros con ":" o simplemente "?"
-        $sql = "INSERT INTO usuarios (nombre_apellido, email, password) VALUES (:nombre, :email, :pass)";
-        $stmt = $conn->prepare($sql);
-        
-        // En PDO, pasamos los datos directamente en el execute como un array
-        $resultado = $stmt->execute([
-            ':nombre' => $nombre,
-            ':email'  => $email,
-            ':pass'   => $pass_encriptada
-        ]);
+        $usuarioDAO = new usuarioDAO($conn);
+        $resultado = $usuarioDAO->crear($usuario);
 
         if ($resultado) {
             header("Location: login.php?registro=exito");
-            exit(); // Siempre pon exit() después de un header Location
+            exit(); 
         }
         
     } catch (PDOException $e) {
-        // En PDO, los errores de duplicado se manejan con el código de error SQLSTATE
+        
         if ($e->getCode() == 23000) { 
             die("Error: El correo electrónico ya está registrado.");
         } else {

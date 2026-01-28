@@ -5,61 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
 
-    <!-- Tailwind CDN (solo utilidades, sin estilos propios) -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- CSS del proyecto -->
     <link rel="stylesheet" href="../ASSETS/css/components.css">
     <link rel="stylesheet" href="../ASSETS/css/register.css">
 
-
     <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
-<body class="min-h-screen flex items-center justify-center">
-    
+<body class="page-center">
+
     <main class="w-full flex justify-center">
-        <section class="register-container">
-            <h1>Regístrate</h1>
-            <p class="register-subtitle">Crea tu perfil y empieza a postular a ofertas.</p>
+        <section class="register-container panel">
+            <div class="panel__inner">
+                <h1 class="page-title">Regístrate</h1>
+                <p class="register-subtitle page-subtitle">Crea tu perfil y empieza a postular a ofertas.</p>
 
-            <form action="../AUTH/procesarRegistro.php" method="post">
-                <div>
-                    <label for="nombre">Nombre y apellidos</label><br>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
+                <form class="form" action="../AUTH/procesarRegistro.php" method="post">
 
-                <div>
-                    <label for="email">Correo electrónico</label><br>
-                    <input type="email" id="email" name="email" required>
-                </div>
+                    <div>
+                        <label class="form-label" for="nombre">Nombre y apellidos</label>
+                        <input class="form-input" type="text" id="nombre" name="nombre" required>
+                    </div>
 
-                <div>
-                    <label for="password">Contraseña</label><br>
-                    <input type="password" id="password" name="password" required>
-                </div>
+                    <div>
+                        <label class="form-label" for="email">Correo electrónico</label>
+                        <input class="form-input" type="email" id="email" name="email" required>
+                    </div>
 
-                <div>
-                    <label for="password2">Repetir contraseña</label><br>
-                    <input type="password" id="password2" name="password2" required>
-                </div>
+                    <div>
+                        <label class="form-label" for="password">Contraseña</label>
+                        <input class="form-input" type="password" id="password" name="password" required>
+                    </div>
 
-                <div>
-                    <label>
-                        <input type="checkbox" name="condiciones" required>
-                        Acepto los términos y condiciones
-                    </label>
-                </div>
+                    <div>
+                        <label class="form-label" for="password2">Repetir contraseña</label>
+                        <input class="form-input" type="password" id="password2" name="password2" required>
+                    </div>
 
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="condiciones" name="condiciones" required>
+                        <label for="condiciones">Acepto los términos y condiciones</label>
+                    </div>
 
-                <button type="submit">Registrarse</button>
-                <div class="register-links">
-                ¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a>
-                </div>
+                    <div class="captcha-wrap">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+                    </div>
 
-            </form>
+                    <button class="btn-primary" type="submit">Registrarse</button>
+
+                    <div class="register-links form-links">
+                        ¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a>
+                    </div>
+
+                </form>
+            </div>
         </section>
     </main>
 

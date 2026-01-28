@@ -1,4 +1,5 @@
 <?php
+include("../includes/header.php");  
 $mensaje = '';
 $tipo_mensaje = '';
 
@@ -38,8 +39,7 @@ print($tipo_mensaje . " " . $mensaje);
 
    <!-- CSS del proyecto -->
    <link rel="stylesheet" href="../ASSETS/css/components.css">
-   <!-- (Opcional) si luego quieres ajustar algo específico de login -->
-   <!-- <link rel="stylesheet" href="../ASSETS/css/login.css"> -->
+
 
    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>

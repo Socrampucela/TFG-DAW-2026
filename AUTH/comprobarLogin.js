@@ -1,5 +1,5 @@
 const formulario = document.getElementById("formulario");
-const divErrores = document.getElementById("divErrores");
+const divErrores = document.getElementById("divError");
 
 if (formulario && divErrores) {
   formulario.addEventListener("submit", (e) => {
@@ -7,34 +7,18 @@ if (formulario && divErrores) {
 
     const errores = [];
 
-    const errNombre = validarNombre(document.getElementById("nombre"));
-    if (errNombre) errores.push(errNombre);
-
     const errEmail = validarEmail(document.getElementById("email"));
     if (errEmail) errores.push(errEmail);
 
     const errPassword = validarPassword(document.getElementById("password"));
     if (errPassword) errores.push(errPassword);
 
-    const errPassword2 = validarPassword2(document.getElementById("password2"));
-    if (errPassword2) errores.push(errPassword2);
-
-    const errPasswordsIguales = validarPasswordsIguales(
-      document.getElementById("password"),
-      document.getElementById("password2")
-    );
-    if (errPasswordsIguales) errores.push(errPasswordsIguales);
-
-    const errCondiciones = validarCondiciones(document.getElementById("condiciones"));
-    if (errCondiciones) errores.push(errCondiciones);
-
     const errCaptcha = validarCaptcha();
     if (errCaptcha) errores.push(errCaptcha);
 
     if (errores.length > 0) {
       e.preventDefault();
-
-      errores.forEach((texto) => {
+      errores.forEach(texto => {
         const p = document.createElement("p");
         p.textContent = texto;
         p.classList.add("text-red-600", "text-sm", "mb-1");
@@ -45,18 +29,8 @@ if (formulario && divErrores) {
 }
 
 /* =========================
-   VALIDACIONES (1 return)
+   VALIDACIONES
    ========================= */
-
-function validarNombre(inputNombre) {
-  let error = null;
-
-  if (!inputNombre || inputNombre.value.trim() === "") {
-    error = "El nombre y apellidos son obligatorios.";
-  }
-
-  return error;
-}
 
 function validarEmail(inputEmail) {
   let error = null;
@@ -90,41 +64,6 @@ function validarPassword(inputPassword) {
     } else if (valor.length < 6) {
       error = "La contraseña debe tener al menos 6 caracteres.";
     }
-  }
-
-  return error;
-}
-
-function validarPassword2(inputPassword2) {
-  let error = null;
-
-  if (!inputPassword2 || inputPassword2.value.trim() === "") {
-    error = "Debes repetir la contraseña.";
-  }
-
-  return error;
-}
-
-function validarPasswordsIguales(inputPassword, inputPassword2) {
-  let error = null;
-
-  if (inputPassword && inputPassword2) {
-    const p1 = inputPassword.value;
-    const p2 = inputPassword2.value;
-
-    if (p1.trim() !== "" && p2.trim() !== "" && p1 !== p2) {
-      error = "Las contraseñas no coinciden.";
-    }
-  }
-
-  return error;
-}
-
-function validarCondiciones(inputCondiciones) {
-  let error = null;
-
-  if (inputCondiciones && !inputCondiciones.checked) {
-    error = "Debes aceptar los términos y condiciones.";
   }
 
   return error;

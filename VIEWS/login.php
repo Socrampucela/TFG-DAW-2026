@@ -35,15 +35,14 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
 
-    <!-- Tailwind (solo utilidades, usado aquí para alertas y layout rápido) -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- CSS del proyecto -->
+    
     <link rel="stylesheet" href="../ASSETS/css/components.css">
-    <!-- (Opcional) si luego quieres algo específico -->
-    <!-- <link rel="stylesheet" href="../ASSETS/css/login.css"> -->
+    
+   
 
-    <!-- Alertas (Tailwind) -->
     <style type="text/tailwindcss">
         @layer components {
             .alert { @apply p-4 mb-6 rounded-lg text-sm font-medium border; }
@@ -53,7 +52,6 @@ if (isset($_GET['error'])) {
         }
     </style>
 
-    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
@@ -73,7 +71,7 @@ if (isset($_GET['error'])) {
                         <strong><?php echo $tipo_mensaje; ?>:</strong> <?php echo $mensaje; ?>
                     </div>
                 <?php endif; ?>
-
+               <div id="divErrores"></div>
                 <form class="form" action="../AUTH/procesarLogin.php" method="post" id="formulario">
 
                     <div>
@@ -98,8 +96,8 @@ if (isset($_GET['error'])) {
 
                 </form>
 
-                <div id="errores"></div>
-                <script src="../AUTH/comprobarRegistro.js"></script>
+                
+                <script src="../AUTH/comprobarLogin.js"></script>
 
             </div>
         </section>

@@ -27,7 +27,7 @@ if (isset($_GET['error'])) {
             break;
     }
 }
-print($tipo_mensaje. " " . $mensaje)
+print($tipo_mensaje . " " . $mensaje);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,25 +35,54 @@ print($tipo_mensaje. " " . $mensaje)
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Iniciar sesión</title>
+
+   <!-- CSS del proyecto -->
+   <link rel="stylesheet" href="../ASSETS/css/components.css">
+   <!-- (Opcional) si luego quieres ajustar algo específico de login -->
+   <!-- <link rel="stylesheet" href="../ASSETS/css/login.css"> -->
+
    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-<body>
-   <form action="../AUTH/procesarLogin.php" method="post" id="formulario">
-                <div>
-                    <label for="email">Correo electrónico</label><br>
-                    <input type="email" id="email" name="email" required>
-                </div>
 
-                <div>
-                    <label for="password">Contraseña</label><br>
-                    <input type="password" id="password" name="password" required>
-                </div>
+<body class="page-center">
 
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+   <main class="w-full flex justify-center">
+      <section class="panel" style="width:100%; max-width:520px;">
+         <div class="panel__inner">
 
-                <button type="submit">Iniciar sesión</button>
+            <h1 class="page-title">Iniciar sesión</h1>
+            <p class="page-subtitle">Accede a tu cuenta para postular a ofertas.</p>
+
+            <form class="form" action="../AUTH/procesarLogin.php" method="post" id="formulario">
+
+               <div>
+                  <label class="form-label" for="email">Correo electrónico</label>
+                  <input class="form-input" type="email" id="email" name="email" required>
+               </div>
+
+               <div>
+                  <label class="form-label" for="password">Contraseña</label>
+                  <input class="form-input" type="password" id="password" name="password" required>
+               </div>
+
+               <div class="captcha-wrap">
+                  <div class="cf-turnstile" data-sitekey="0x4AAAAAACT39mb_TupAZlv2"></div>
+               </div>
+
+               <button class="btn-primary" type="submit">Iniciar sesión</button>
+
+               <div class="form-links">
+                  ¿No tienes cuenta? <a href="register.php">Regístrate</a>
+               </div>
+
             </form>
+
             <div id="errores"></div>
-            <script src="../AUTH/comprobarRegistro.js"></script>
+
+         </div>
+      </section>
+   </main>
+
+   <script src="../AUTH/comprobarRegistro.js"></script>
 </body>
 </html>

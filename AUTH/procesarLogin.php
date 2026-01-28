@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $usuario = $usuarioDAO->buscarPorEmail($email);
 
         if ($usuario === null) {
-            header("Location: login.php?error=credenciales");
+            header("Location: ../VIEWS/login.php?error=credenciales");
             exit();
         }
 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: ../VIEWS/index.php");
             exit();
         }else{
-            header("Location: login.php?error=credenciales");
+            header("Location: ../VIEWS/login.php?error=credenciales");
             exit();
         }
 
@@ -35,6 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Error en la base de datos: " . $e->getMessage());
     }
     }else {
-    header("Location: login.php");
+    header("Location: ../VIEWS/login.php");
     exit();
     }

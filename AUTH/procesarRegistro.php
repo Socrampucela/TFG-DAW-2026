@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $resultado = $usuarioDAO->crear($usuario);
 
         if ($resultado) {
-            header("Location: login.php?registro=exito");
+            header("Location: ../VIEWS/login.php?registro=exito");
             exit(); 
         }
         

@@ -1,4 +1,5 @@
 <?php
+include("../includes/header.php");  
 $mensaje = '';
 $tipo_mensaje = '';
 
@@ -38,7 +39,7 @@ print($tipo_mensaje . " " . $mensaje);
 
    <!-- CSS -->
    <link rel="stylesheet" href="../ASSETS/css/components.css">
-  
+
 
    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>

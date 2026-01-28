@@ -1,4 +1,4 @@
-const divErrores = document.getElementById("errores")
+const divErrores = document.getElementById("divError")
 document.getElementById('formulario').addEventListener("submit",(e)=>{
 const respuestaCaptcha = document.querySelector('[name="cf-turnstile-response"]')
 if(!respuestaCaptcha || !respuestaCaptcha.value){

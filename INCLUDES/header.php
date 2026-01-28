@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav class="flex items-center justify-between px-8 py-4 bg-white shadow-md w-full">
     <div class="flex items-center">
         <a href="index.php">
-            <img src="../ASSETS/img/logo.jfif" alt="Logo" class="h-10 w-auto hover:opacity-80 transition">
+            <img src="../ASSETS/img/logo.png" alt="Logo" class="h-10 w-auto hover:opacity-80 transition">
         </a>
     </div>
 
@@ -40,7 +40,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         Cuenta
                     </div>
                     <a href="perfil.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">Ver perfil</a>
-                    <a href="configuracion.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">Ajustes</a>
+                   
                     <hr class="my-1 border-gray-100">
                     <a href="../AUTH/logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-semibold transition">Cerrar sesión</a>
                 </div>

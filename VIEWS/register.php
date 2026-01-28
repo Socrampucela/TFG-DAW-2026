@@ -24,7 +24,7 @@
             <h1>Regístrate</h1>
             <p class="register-subtitle">Crea tu perfil y empieza a postular a ofertas.</p>
 
-            <form action="../AUTH/procesarRegistro.php" method="post">
+            <form action="../AUTH/procesarRegistro.php" method="post" id="formulario">
                 <div>
                     <label for="nombre">Nombre y apellidos</label><br>
                     <input type="text" id="nombre" name="nombre" required>
@@ -60,6 +60,8 @@
                 </div>
 
             </form>
+            <div id="errores"></div>
+            <script src="../AUTH/comprobarRegistro.js"></script>
         </section>
     </main>
 

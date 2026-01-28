@@ -38,7 +38,7 @@ print($tipo_mensaje. " " . $mensaje)
    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
-   <form action="../AUTH/procesarLogin.php" method="post">
+   <form action="../AUTH/procesarLogin.php" method="post" id="formulario">
                 <div>
                     <label for="email">Correo electrónico</label><br>
                     <input type="email" id="email" name="email" required>
@@ -53,5 +53,7 @@ print($tipo_mensaje. " " . $mensaje)
 
                 <button type="submit">Iniciar sesión</button>
             </form>
+            <div id="errores"></div>
+            <script src="../AUTH/comprobarRegistro.js"></script>
 </body>
 </html>

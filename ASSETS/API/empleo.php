@@ -1,42 +1,47 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/../CONFIG/db.php';
-require_once __DIR__ . '/../DAO/empleoDAO.PHP';
+require_once(__DIR__ . "/../../config/db.php");
+require_once(__DIR__ . "/../../DAO/EmpleoDAO.php");
 
 try {
-    $dao = new empleo($conn);
+    $dao = new empleo($conn); // tu clase se llama empleo (case-insensitive en PHP)
 
-    $q = isset($_GET['q']) ? trim($_GET['q']) : '';
+    $titulo    = isset($_GET['titulo']) ? trim($_GET['titulo']) : '';
     $provincia = isset($_GET['provincia']) ? trim($_GET['provincia']) : '';
-    $fecha = isset($_GET['fecha']) ? trim($_GET['fecha']) : ''; // '' | 24h | 7d | 30d
+    $localidad = isset($_GET['localidad']) ? trim($_GET['localidad']) : '';
+    $dias      = isset($_GET['dias']) ? (int)$_GET['dias'] : 0;
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    if ($page < 1) $page = 1;
+    $page     = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+    $pageSize = isset($_GET['pageSize']) ? max(1, min(50, (int)$_GET['pageSize'])) : 20;
+    $inicio   = ($page - 1) * $pageSize;
 
-    $pageSize = 12;
-    $inicio = ($page - 1) * $pageSize;
+    // whitelist días (evita valores raros)
+    $allowedDias = [0, 7, 30, 90];
+    if (!in_array($dias, $allowedDias, true)) $dias = 0;
 
-    $total = $dao->contarFiltrados($q, $provincia, $fecha);
-    $items = $dao->buscarEmpleosPaginado($q, $provincia, $fecha, $inicio, $pageSize);
+    $filtros = [
+        'titulo' => $titulo,
+        'provincia' => $provincia,
+        'localidad' => $localidad,
+        'dias' => $dias
+    ];
 
-    foreach ($items as &$it) {
-        $it['DescripcionTexto'] = isset($it['Descripción']) ? trim(strip_tags($it['Descripción'])) : '';
-    }
+    $items = $dao->buscarEmpleosPaginado($filtros, $inicio, $pageSize);
+    $total = $dao->contarFiltrados($filtros);
 
     echo json_encode([
-        'ok' => true,
+        'items' => $items,
+        'total' => (int)$total,
         'page' => $page,
         'pageSize' => $pageSize,
-        'total' => $total,
-        'pages' => (int)ceil($total / $pageSize),
-        'items' => $items
+        'totalPages' => (int)ceil($total / $pageSize)
     ], JSON_UNESCAPED_UNICODE);
 
 } catch (Throwable $e) {
     http_response_code(500);
     echo json_encode([
-        'ok' => false,
-        'error' => 'Error interno al buscar ofertas.'
+        'error' => 'Error interno',
+        'details' => $e->getMessage()
     ], JSON_UNESCAPED_UNICODE);
 }

@@ -18,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="hidden md:flex gap-8">
         <a href="index.php" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Inicio</a>
-        <a href="ofertas.php" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Buscar ofertas</a>
+        <a href="buscarEmpleo.php" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Buscar ofertas</a>
         <a href="crearEmpleo.php" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Publicar empleo</a>
     </div>
 

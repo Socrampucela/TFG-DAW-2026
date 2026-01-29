@@ -2,8 +2,9 @@
 
 require_once("../config/db.php");
 require_once("../DAO/EmpleoDAO.php");
+require_once ("../CLASSES/empleo.php");
 
-$gestionEmpleos = new Empleo($conn);
+$gestionEmpleos = new EmpleoDAO($conn);
 
 $empleosPorPagina = 20;
 $paginaActual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;

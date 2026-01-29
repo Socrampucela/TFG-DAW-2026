@@ -18,8 +18,23 @@ if(isset($_SESSION['nombre'])){ ?>
                     </div>
 
                     <div>
-                        <label class="form-label" for="email">Correo electrónico</label>
-                        <input class="form-input" type="email" id="email" name="email" required>
+                        <label>Provincia:</label>
+                        <select id="select-provincia">
+                            <option value="">Selecciona una provincia</option>
+                           <?php
+                                $sentencia = $pdo->query("SELECT id, nombre FROM provincias ORDER BY nombre ASC");
+                                while ($row = $stmt->fetch()) {
+                                    echo "<option value='{$row['id']}'>{$row['nombre']}</option>";
+                                }
+                                ?> 
+                        
+                        </select>
+                    </div>
+                    <div>
+                        <label>Localidad:</label>
+                        <select id="select-localidad" disabled>
+                            <option value="">Selecciona primero una provincia</option>
+                        </select>
                     </div>
 
                     <div>

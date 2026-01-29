@@ -2,14 +2,13 @@
 
 class Usuario 
 {
-    private ?int $id;
+    private ?int $id = null;
     private string $nombreApellidos;
     private string $email;
     private string $password;
 
     public function __construct(string $nombreApellidos, string $email, string $password)
     {
-        $this->id = $id;
         $this->nombreApellidos = $nombreApellidos;
         $this->email = $email;
         $this->password = $password;

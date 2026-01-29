@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 ?>
 <head>
+    <link rel="stylesheet" href="../ASSETS/css/components.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

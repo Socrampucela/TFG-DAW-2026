@@ -1,5 +1,5 @@
 <?php
-include("../includes/header.php");
+
 require_once("../config/db.php");
 require_once("../DAO/EmpleoDAO.php");
 
@@ -21,13 +21,14 @@ $totalPaginas = ceil($totalEmpleos / $empleosPorPagina);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de empleos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style type="text/tailwindcss">
+   <style type="text/tailwindcss">
         @layer components {
             .job-card { @apply bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between; }
         }
     </style>
 </head>
 <body class="bg-gray-50">
+    <?php include("../includes/header.php"); ?>
     <main class="max-w-6xl mx-auto py-12 px-6">
         <div class="mb-10">
             <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Ofertas de empleo</h1>
@@ -39,7 +40,7 @@ $totalPaginas = ceil($totalEmpleos / $empleosPorPagina);
                 <article class="job-card min-h-[250px]">
                     <div>
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#3882B6] bg-blue-50 px-2 py-1 rounded">
                                 <?php echo htmlspecialchars($empleo['Categoría'] ?? 'General'); ?>
                             </span>
                             <span class="text-gray-400 text-xs">
@@ -49,7 +50,7 @@ $totalPaginas = ceil($totalEmpleos / $empleosPorPagina);
                         <h2 class="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
                             <?php echo htmlspecialchars($empleo['Título']); ?>
                         </h2>
-                        <p class="text-blue-500 font-semibold text-sm mb-3">
+                        <p class="text-[#3882B6] font-semibold text-sm mb-3">
                             <?php echo htmlspecialchars($empleo['Localidad']); ?>
                         </p>
                         <p class="text-gray-600 text-sm line-clamp-3 mb-4">
@@ -61,7 +62,7 @@ $totalPaginas = ceil($totalEmpleos / $empleosPorPagina);
                     </div>
                     
                     <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <a href="<?php echo $empleo['Enlace al contenido']; ?>" target="_blank" class="text-blue-600 font-bold text-sm hover:text-blue-800 transition-colors">
+                        <a href="<?php echo $empleo['Enlace al contenido']; ?>" target="_blank" class="text-[#3882B6] font-bold text-sm hover:text-blue-800 transition-colors">
                             Ver detalles →
                         </a>
                     </div>

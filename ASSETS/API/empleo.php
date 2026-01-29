@@ -5,7 +5,7 @@ require_once(__DIR__ . "/../../config/db.php");
 require_once(__DIR__ . "/../../DAO/EmpleoDAO.php");
 
 try {
-    $dao = new empleo($conn); // tu clase se llama empleo (case-insensitive en PHP)
+    $dao = new empleoDAO($conn); // tu clase se llama empleo (case-insensitive en PHP)
 
     $titulo    = isset($_GET['titulo']) ? trim($_GET['titulo']) : '';
     $provincia = isset($_GET['provincia']) ? trim($_GET['provincia']) : '';

@@ -18,10 +18,8 @@ async function buscarLocalidades() {
             
             respuestas.forEach(respuesta => {
                 let option = document.createElement("option");
-                option.value = respuesta.Municipio;          // 👈 filtro por texto (lo que hay en tu tabla ofertas)
-option.text = respuesta.Municipio;
-option.dataset.cod = respuesta.Cod_Municipio; // opcional, por si te sirve
-
+                option.value = respuesta.Cod_Municipio;  // 👈 CAMBIO: ahora envía el código
+                option.text = respuesta.Municipio;       // Pero muestra el nombre
                 selectLocalidad.appendChild(option);
             });
 

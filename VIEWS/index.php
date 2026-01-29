@@ -12,6 +12,14 @@ $inicio = ($paginaActual - 1) * $empleosPorPagina;
 $empleos = $gestionEmpleos->obtenerEmpleosPaginado($inicio, $empleosPorPagina);
 $totalEmpleos = $gestionEmpleos->contarTodos();
 $totalPaginas = ceil($totalEmpleos / $empleosPorPagina);
+if(isset($_GET["error"])){
+if($_GET["error"]=="login_required"){
+    echo "<div class='mb-4 p-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-3'>";
+    echo "<p> Debe iniciar sesión para acceder a esta zona</p>";
+    echo "</div>";
+}}else{
+
+}
 ?>
 
 <!DOCTYPE html>

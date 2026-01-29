@@ -177,13 +177,17 @@
   text-decoration: underline;
 }
 
-.site-footer__sep{
-  color: rgba(43,47,51,.35);
+.site-footer__sep {
+  margin: 0;
+  color: var(--c-secondary);
+  font-weight: 1000;         
+  font-size: 1.1em;          
 }
 
 
 
-/* Responsive */
+
+
 @media (max-width: 520px){
   .site-footer__inner{
     flex-direction: column;
@@ -222,7 +226,7 @@
   transform: translateY(1px);
 }
 
-/* Links debajo del form */
+
 .form-links{
   margin-top: 10px;
   text-align: center;

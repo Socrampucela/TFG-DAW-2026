@@ -55,9 +55,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["usuario_id"] = $usuario->getID();
             $_SESSION["email"] = $usuario->getEmail();
             $_SESSION["nombre"] = $usuario->getNombreApellidos();
+            $_SESSION["rol"] = $usuario->getRol(); // 👈 NUEVO: Guardar el rol
             $_SESSION["logueado"] = true;
 
-            header("Location: ../VIEWS/index.php");
+            // Redirigir según el rol
+            if ($usuario->esAdmin()) {
+                header("Location: ../VIEWS/admin/dashboard.php");
+            } else {
+                header("Location: ../VIEWS/index.php");
+            }
             exit();
         }else{
             header("Location: ../VIEWS/login.php?error=credenciales");

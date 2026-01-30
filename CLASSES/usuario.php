@@ -1,56 +1,57 @@
 <?php
 
-class Usuario 
-{
-    private ?int $id = null;
-    private string $nombreApellidos;
-    private string $email;
-    private string $password;
+class Usuario {
+    public int $id;
+    public string $nombre_apellido;
+    public string $email;
+    public string $password;
+    public string $rol; // 'usuario' o 'administrador'
+    public string $fecha_registro;
 
-    public function __construct(string $nombreApellidos, string $email, string $password)
-    {
-        $this->nombreApellidos = $nombreApellidos;
+    public function __construct(
+        string $nombre_apellido,
+        string $email,
+        string $password,
+        string $rol = 'usuario'
+    ) {
+        $this->nombre_apellido = $nombre_apellido;
         $this->email = $email;
         $this->password = $password;
+        $this->rol = $rol;
+        $this->fecha_registro = date("Y-m-d H:i:s");
     }
 
-    public function getId(): ?int 
-    {
+    // Getters para compatibilidad con tu código existente
+    public function getID(): int {
         return $this->id;
     }
 
-    public function setId(int $id): void 
-    {
-        $this->id = $id;
+    public function getNombreApellidos(): string {
+        return $this->nombre_apellido;
     }
 
-    public function getNombreApellidos(): string 
-    {
-        return $this->nombreApellidos;
-    }
-
-    public function setNombreApellidos(string $nombreApellidos): void 
-    {
-        $this->nombreApellidos = $nombreApellidos;
-    }
-
-    public function getEmail(): string 
-    {
+    public function getEmail(): string {
         return $this->email;
     }
 
-    public function setEmail(string $email): void 
-    {
-        $this->email = $email;
-    }
-
-    public function getPassword(): string 
-    {
+    public function getPassword(): string {
         return $this->password;
     }
 
-    public function setPassword(string $password): void 
-    {
-        $this->password = $password;
+    public function getRol(): string {
+        return $this->rol;
+    }
+
+    public function getFechaRegistro(): string {
+        return $this->fecha_registro;
+    }
+
+    // Métodos útiles
+    public function esAdmin(): bool {
+        return $this->rol === 'administrador';
+    }
+
+    public function hashPassword(): void {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }
 }

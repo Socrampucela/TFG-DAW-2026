@@ -23,13 +23,16 @@ require_once("../config/db.php");
 <main class="max-w-6xl mx-auto py-12 px-6">
     <div class="mb-10">
         <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Buscar ofertas</h1>
-        <p class="text-gray-500 mt-2 text-lg" id="totalText">Escribe o filtra para ver resultados.</p>
+        <p class="text-gray-500 mt-2 text-lg" id="totalText">Ups, algo ha salido mal</p>
     </div>
-
+<div>
+                <a href="mapa.php" class="btn-primary !w-auto inline-flex items-center justify-center  !bg-[#2b2f33]">🗺️ Ver mapa</a>
+            </div>
     <!-- Filtros -->
     <section class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-8">
+        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
+            
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Título</label>
                 <input id="fTitulo" class="input" type="text" placeholder="Ej. Cocinero, Albañil..." autocomplete="off">
@@ -70,6 +73,7 @@ require_once("../config/db.php");
         </div>
 
         <div class="mt-4 flex items-center justify-between gap-4">
+            
             <p class="text-sm text-gray-400" id="statusText"></p>
             <button id="btnReset" class="text-sm font-bold text-[#3882B6] hover:underline">Limpiar filtros</button>
         </div>

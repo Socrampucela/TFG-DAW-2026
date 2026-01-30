@@ -14,14 +14,27 @@ class EmpleoDAO {
                     ORDER BY STR_TO_DATE(`Fecha publicación`, '%Y-%m-%d') DESC 
                     LIMIT :inicio, :cantidad";
             
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':inicio', $inicio, PDO::PARAM_INT);
-            $stmt->bindValue(':cantidad', $cantidad, PDO::PARAM_INT);
-            $stmt->execute();
+            $sentencia = $this->conn->prepare($sql);
+            $sentencia->bindValue(':inicio', $inicio, PDO::PARAM_INT);
+            $sentencia->bindValue(':cantidad', $cantidad, PDO::PARAM_INT);
+            $sentencia->execute();
             
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error en obtenerEmpleosPaginado: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function obtenerTodos(): array{
+        try{
+            $sentencia = "SELECT * FROM `ofertas_de_empleo`";
+            $sentencia = $this->conn->prepare($sentencia);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            error_log("Error en obtenerTodos: " . $e->getMessage());
             return [];
         }
     }
@@ -39,15 +52,15 @@ class EmpleoDAO {
     public function insertar(Empleo $empleo): bool {
         try {
             // 1. OBTENER DATOS GEOGRÁFICOS DEL MUNICIPIO
-            $stmtMun = $this->conn->prepare("SELECT Municipio, Provincia, Latitud, Longitud, Cod_INE 
+            $sentenciaMun = $this->conn->prepare("SELECT Municipio, Provincia, Latitud, Longitud, Cod_INE 
                                             FROM municipiosjcyl 
                                             WHERE Cod_Municipio = :codmun AND Cod_Provincia = :codprov");
 
-            $stmtMun->bindValue(':codmun', $empleo->codigo_localidad, PDO::PARAM_STR);
-            $stmtMun->bindValue(':codprov', $empleo->provincia, PDO::PARAM_STR);
-            $stmtMun->execute();
+            $sentenciaMun->bindValue(':codmun', $empleo->codigo_localidad, PDO::PARAM_STR);
+            $sentenciaMun->bindValue(':codprov', $empleo->provincia, PDO::PARAM_STR);
+            $sentenciaMun->execute();
             
-            $res = $stmtMun->fetch(PDO::FETCH_ASSOC);
+            $res = $sentenciaMun->fetch(PDO::FETCH_ASSOC);
 
             if ($res) {
                 $empleo->setDatosGeograficos(
@@ -83,9 +96,9 @@ class EmpleoDAO {
                 :tit, :prov, :fec, :des, :palt, :fuen, :idloc, :loc, :lat, :lon, :codloc, :ident, :meta, :link, :pos
             )";
 
-            $stmt = $this->conn->prepare($sql);
+            $sentencia = $this->conn->prepare($sql);
 
-            return $stmt->execute([
+            return $sentencia->execute([
                 ':tit'    => $empleo->titulo,
                 ':prov'   => $empleo->provincia,
                 ':fec'    => $empleo->fecha_publicacion,
@@ -144,17 +157,17 @@ public function buscarEmpleosPaginado(array $filtros, int $inicio, int $cantidad
         $sql .= " ORDER BY STR_TO_DATE(`Fecha publicación`, '%Y-%m-%d') DESC
                   LIMIT :inicio, :cantidad";
 
-        $stmt = $this->conn->prepare($sql);
+        $sentencia = $this->conn->prepare($sql);
 
         foreach ($params as $k => $v) {
-            $stmt->bindValue($k, $v, PDO::PARAM_STR);
+            $sentencia->bindValue($k, $v, PDO::PARAM_STR);
         }
 
-        $stmt->bindValue(':inicio', $inicio, PDO::PARAM_INT);
-        $stmt->bindValue(':cantidad', $cantidad, PDO::PARAM_INT);
+        $sentencia->bindValue(':inicio', $inicio, PDO::PARAM_INT);
+        $sentencia->bindValue(':cantidad', $cantidad, PDO::PARAM_INT);
 
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function contarFiltrados(array $filtros): int
@@ -189,14 +202,14 @@ public function buscarEmpleosPaginado(array $filtros, int $inicio, int $cantidad
             $sql .= " WHERE " . implode(" AND ", $where);
         }
 
-        $stmt = $this->conn->prepare($sql);
+        $sentencia = $this->conn->prepare($sql);
 
         foreach ($params as $k => $v) {
-            $stmt->bindValue($k, $v, PDO::PARAM_STR);
+            $sentencia->bindValue($k, $v, PDO::PARAM_STR);
         }
 
-        $stmt->execute();
-        return (int)$stmt->fetchColumn();
+        $sentencia->execute();
+        return (int)$sentencia->fetchColumn();
     }
 
     

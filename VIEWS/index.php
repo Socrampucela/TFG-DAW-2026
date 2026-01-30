@@ -118,5 +118,6 @@ if($_GET["error"]=="login_required"){
             </nav>
         <?php endif; ?>
     </main>
+    <?php  include '../INCLUDES/footer.php'; ?>
 </body>
 </html>

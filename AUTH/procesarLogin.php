@@ -55,12 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["usuario_id"] = $usuario->getID();
             $_SESSION["email"] = $usuario->getEmail();
             $_SESSION["nombre"] = $usuario->getNombreApellidos();
-            $_SESSION["rol"] = $usuario->getRol(); // 👈 NUEVO: Guardar el rol
+            $_SESSION["rol"] = $usuario->getRol(); 
             $_SESSION["logueado"] = true;
 
             // Redirigir según el rol
             if ($usuario->esAdmin()) {
-                header("Location: ../VIEWS/admin/dashboard.php");
+                header("Location: ../VIEWS/index.php");
             } else {
                 header("Location: ../VIEWS/index.php");
             }

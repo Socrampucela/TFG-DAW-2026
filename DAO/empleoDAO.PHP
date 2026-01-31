@@ -51,7 +51,7 @@ class EmpleoDAO {
 
     public function insertar(Empleo $empleo): bool {
         try {
-            // 1. OBTENER DATOS GEOGRÁFICOS DEL MUNICIPIO
+
             $sentenciaMun = $this->conn->prepare("SELECT Municipio, Provincia, Latitud, Longitud, Cod_INE 
                                             FROM municipiosjcyl 
                                             WHERE Cod_Municipio = :codmun AND Cod_Provincia = :codprov");
@@ -71,11 +71,9 @@ class EmpleoDAO {
                     (string)$res['Cod_INE']
                 );
             } else {
-                // Log si no encuentra el municipio
                 error_log("No se encontró municipio con Cod_Municipio={$empleo->codigo_localidad} y Cod_Provincia={$empleo->provincia}");
             }
 
-            // 2. INSERTAR EN LA TABLA FINAL
             $sql = "INSERT INTO ofertas_de_empleo (
                 `Título`, 
                 `Provincia`, 
@@ -137,7 +135,6 @@ public function buscarEmpleosPaginado(array $filtros, int $inicio, int $cantidad
         }
 
         if (!empty($filtros['localidad'])) {
-            // Como viene de select (texto), puede ser exacto
             $where[] = "`Localidad` = :localidad";
             $params[':localidad'] = $filtros['localidad'];
         }
@@ -212,5 +209,16 @@ public function buscarEmpleosPaginado(array $filtros, int $inicio, int $cantidad
         return (int)$sentencia->fetchColumn();
     }
 
+    public function devolverEmpleoProvincia(){
+        try{
+            $sentencia = "SELECT provincia, COUNT(*) AS total FROM ofertas_de_empleo GROUP BY provincia ORDER BY total DESC";
+            $sentencia = $this->conn->prepare($sentencia);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            error_log("Error en devolverEmpleoProvincia: " . $e->getMessage());
+        }
+    }
     
 }

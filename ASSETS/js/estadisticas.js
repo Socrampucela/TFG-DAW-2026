@@ -1,35 +1,52 @@
+document.addEventListener("DOMContentLoaded",()=>{
+let miGrafico; // Variable global para la instancia
+const ctx = document.getElementById('graficoAdmin').getContext('2d');
 
-if (typeof datosEstadisticas !== 'undefined' && datosEstadisticas.length > 0) {
-    
+function renderizarGrafico(tipo) {
+    // Si ya existe un gráfico, lo borramos para poder pintar el nuevo
+    if (miGrafico) {
+        miGrafico.destroy();
+    }
 
-    const etiquetas = datosEstadisticas.map(item => item.provincia || 'Sin Provincia');
-    const valores = datosEstadisticas.map(item => item.total);
-
-    const ctx = document.getElementById('graficoProvincias').getContext('2d');
-    
-    new Chart(ctx, {
-        type: 'pie', 
-        data: {
-            labels: etiquetas,
-            datasets: [{
-                label: 'Ofertas de empleo',
-                data: valores,
-                backgroundColor: [
-                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
-                    '#9966FF', '#FF9F40', '#FFCD56', '#C9CBCF'
-                ],
-                hoverOffset: 10
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
+    if (tipo === 'provincia') {
+        miGrafico = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: datosProvincias.map(i => i.provincia),
+                datasets: [{
+                    data: datosProvincias.map(i => i.total),
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b']
+                }]
+            },
+            options: { maintainAspectRatio: false }
+        });
+    } else if (tipo === 'fecha') {
+        miGrafico = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: datosFechas.map(i => i.fecha),
+                datasets: [{
+                    label: 'Ofertas Publicadas',
+                    data: datosFechas.map(i => i.total),
+                    backgroundColor: '#4e73df',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, ticks: { stepSize: 1 } }
                 }
             }
-        }
-    });
-} else {
-    console.error("No hay datos disponibles para generar el gráfico.");
+        });
+    }
 }
+
+// Escuchar cambios en el desplegable
+document.getElementById('selectorGrafico').addEventListener('change', (e) => {
+    renderizarGrafico(e.target.value);
+});
+
+// Carga inicial (por defecto el de provincias)
+renderizarGrafico('provincia');
+})

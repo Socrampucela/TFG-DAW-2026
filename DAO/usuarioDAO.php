@@ -1,10 +1,18 @@
 <?php
 
+use PhpParser\Node\Stmt\TryCatch;
+
 class UsuarioDAO {
     private PDO $conn;
 
     public function __construct(PDO $conexion) {
         $this->conn = $conexion;
+    }
+    public function mostrarTodos(){
+        $sql = "SELECT * FROM usuarios";
+        $sentencia = $this->conn->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Método para convertir array a objeto Usuario
@@ -175,7 +183,7 @@ class UsuarioDAO {
             return false;
         }
     }
-
+    //USARLA????? BORRAR SI NO
     // Obtener estadísticas
     public function obtenerEstadisticas(): array {
         try {
@@ -215,4 +223,5 @@ class UsuarioDAO {
             ];
         }
     }
+    
 }

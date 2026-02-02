@@ -220,5 +220,19 @@ public function buscarEmpleosPaginado(array $filtros, int $inicio, int $cantidad
             error_log("Error en devolverEmpleoProvincia: " . $e->getMessage());
         }
     }
-    
+    public function obtenerEmpleosPorDia(): array{
+        try{
+            $sql = "Select DATE(`Fecha publicación`) as fecha, COUNT(*) as total
+            FROM ofertas_de_empleo
+            GROUP BY DATE(`Fecha publicación`)
+            ORDER BY fecha ASC;";
+            $sentencia = $this->conn->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+        catch (PDOException $e) {
+        return [];
+        }
+    }
 }

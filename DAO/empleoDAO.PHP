@@ -235,4 +235,27 @@ public function buscarEmpleosPaginado(array $filtros, int $inicio, int $cantidad
         return [];
         }
     }
+    public function obtenerPorId($id){
+        $sql = "SELECT * FROM ofertas_de_empleo WHERE Identificador = :id";
+        $sentencia = $this->conn->prepare($sql);
+        $sentencia->execute([':id' => $id]);
+        return $sentencia->fetch(PDO::FETCH_ASSOC);
+    }
+    public function actualizar($id,$datos){
+        $sql = "UPDATE `ofertas_de_empleo` SET 
+            `Título` = :titulo, 
+            `Provincia` = :provincia, 
+            `Localidad` = :localidad, 
+            `Descripción` = :descripcion, 
+            `Enlace al contenido` = :enlace
+            WHERE `Identificador` = :id";
+        $sentencia = $this->conn->prepare($sql);
+        $datos[':id'] = $id;
+        return $sentencia->execute($datos);
+    }
+    public function borrarOferta($id) {
+    $sql = "DELETE FROM `ofertas_de_empleo` WHERE `Identificador` = :id";
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([':id' => $id]);
+}
 }

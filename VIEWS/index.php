@@ -57,15 +57,15 @@ if($_GET["error"]=="login_required"){
                             </span>
                         </div>
                         <h2 class="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
-                            <?php echo htmlspecialchars($empleo['Título']); ?>
+                            <?=  $empleo['Título']; ?>
                         </h2>
                         <p class="text-[#3882B6] font-semibold text-sm mb-3">
-                            <?php echo htmlspecialchars($empleo['Localidad']); ?>
+                            <?=($empleo['Localidad']); ?>
                         </p>
                         <p class="text-gray-600 text-sm line-clamp-3 mb-4">
                             <?php 
                                 $descripcion = $empleo['Descripción'];
-                                echo htmlspecialchars(strip_tags($descripcion));
+                                echo strip_tags($descripcion);
                             ?>
                         </p>
                     </div>

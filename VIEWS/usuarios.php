@@ -14,83 +14,81 @@ $usuarios = $usuarioDAO->mostrarTodos();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                principal: {
+                  100: '#dbeafe',
+                  500: '#3b82f6',
+                  600: '#2563eb',
+                  700: '#1d4ed8',
+                }
+              }
+            }
+          }
+        }
+    </script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50 text-gray-800">
 
-<div class="max-w-6xl mx-auto my-10 bg-white shadow-2xl rounded-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
+<div class="max-w-6xl mx-auto my-10 bg-white shadow-xl rounded-xl overflow-hidden flex flex-col md:flex-row border border-gray-200">
     
-    <aside class="w-full md:w-64 bg-gray-50 border-r border-gray-200 p-6 flex flex-col gap-2">
-        <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Menú Principal</h2>
-        
-        <button onclick="location.href='dashboard.php'" class="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all font-medium">
-            <span class="text-xl">📊</span> Panel de Control
-        </button>
-        
-        <button class="flex items-center gap-3 px-4 py-2 text-principal-600 bg-white border border-principal-100 rounded-lg shadow-sm font-medium">
-            <span class="text-xl">👥</span> Gestionar Usuarios
-        </button>
-        
-        <button onclick="location.href='ofertas.php'" class="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all font-medium">
-            <span class="text-xl">💼</span> Gestionar Ofertas
-        </button>
+    <?php 
+        $pagina_actual = 'usuarios'; 
+        include_once "../includes/sideNavAdmin.php"; 
+    ?>
 
-        <div class="mt-auto pt-6 border-t border-gray-200">
-            <a href="../AUTH/logout.php" class="text-sm text-red-500 hover:underline font-semibold">Cerrar Sesión</a>
-        </div>
-    </aside>
-
-    <main class="flex-1 p-8 bg-white">
-        <div class="flex items-center justify-between mb-8">
+    <main class="flex-1 p-8">
+        <div class="flex items-center justify-between mb-10">
             <div>
-                <h1 class="text-2xl font-bold text-gray-800 border-b-4 border-principal-500 inline-block pb-1">Gestión de Usuarios</h1>
-                <p class="text-gray-500 mt-2 text-sm">Mostrando <?= count($usuarios) ?> usuarios registrados.</p>
+                <h1 class="text-2xl font-bold text-gray-800">Gestión de Usuarios</h1>
+                <p class="text-gray-400 text-sm mt-1">Total: <?= count($usuarios) ?> registros</p>
             </div>
-            <button class="bg-principal-600 hover:bg-principal-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+            <a href="register.php" class="bg-principal-600 hover:bg-principal-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all shadow-md">
                 + Nuevo Usuario
-            </button>
+            </a>
         </div>
 
-        <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
-            <table class="w-full text-left">
-                <thead class="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">ID</th>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Usuario</th>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Rol</th>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Registro</th>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase text-right">Acciones</th>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-separate border-spacing-y-2">
+                <thead>
+                    <tr class="text-gray-400">
+                        <th class="px-4 py-2 text-xs uppercase tracking-wider font-semibold">ID</th>
+                        <th class="px-4 py-2 text-xs uppercase tracking-wider font-semibold">Usuario</th>
+                        <th class="px-4 py-2 text-xs uppercase tracking-wider font-semibold">Rol</th>
+                        <th class="px-4 py-2 text-xs uppercase tracking-wider font-semibold">Registro</th>
+                        <th class="px-4 py-2 text-xs uppercase tracking-wider font-semibold text-right">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <?php foreach ($usuarios as $usuario): ?>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 text-sm font-mono text-gray-400">#<?= $usuario['id'] ?></td>
-                        <td class="px-6 py-4">
-                            <div class="text-sm font-semibold text-gray-800"><?= htmlspecialchars($usuario['nombre_apellido']) ?></div>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <?= $usuario['rol'] === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-principal-100 text-principal-800' ?>">
-                                <?= ucfirst($usuario['rol']) ?>
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            <?= date('d/m/Y', strtotime($usuario['fecha_registro'])) ?>
-                        </td>
-                        <td class="px-6 py-4 text-right space-x-3">
-                            <a href="editar.php?id=<?= $usuario['id'] ?>" class="text-principal-600 hover:text-principal-900 text-sm font-bold">Editar</a>
-                            <a href="eliminar.php?id=<?= $usuario['id'] ?>" 
-                               onclick="return confirm('¿Eliminar permanentemente a <?= htmlspecialchars($usuario['nombre_apellido']) ?>?')"
-                               class="text-red-500 hover:text-red-700 text-sm font-bold">
-                               Eliminar
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                <tbody class="divide-y divide-gray-50">
+                    <?php 
+                    foreach ($usuarios as $usuario) {
+                        $badgeStyle = ($usuario['rol'] === 'admin') ? 'text-purple-600 bg-purple-50' : 'text-blue-600 bg-blue-50';
+                        $fecha = date('d/m/Y', strtotime($usuario['fecha_registro']));
+                        $nombre = htmlspecialchars($usuario['nombre_apellido']);
+
+                        echo "<tr class='hover:bg-gray-50 transition-all'>";
+                        echo "<td class='px-4 py-4 text-sm font-mono text-gray-300'>#$usuario[id]</td>"; 
+                        echo "<td class='px-4 py-4 text-sm font-medium text-gray-700'>$nombre</td>"; 
+                        echo "<td class='px-4 py-4'><span class='px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide $badgeStyle'>" . $usuario['rol'] . "</span></td>"; 
+                        echo "<td class='px-4 py-4 text-sm text-gray-400'>$fecha</td>"; 
+                        echo "<td class='px-4 py-4 text-right text-sm font-bold space-x-4'>
+                                <a href='editar.php?id=$usuario[id]' class='text-gray-400 hover:text-principal-600 transition-colors'>Editar</a>
+                                <a href='eliminar.php?id=$usuario[id]' 
+                                   onclick=\"return confirm('¿Eliminar a $nombre?')\"
+                                   class='text-gray-400 hover:text-red-500 transition-colors'>
+                                   Borrar
+                                </a>
+                              </td>";
+                        echo "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
     </main>
 </div>
-
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-01-2026 a las 19:47:45
+-- Tiempo de generación: 02-02-2026 a las 15:58:57
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -3048,7 +3048,20 @@ INSERT INTO `ofertas_de_empleo` (`Título`, `Provincia`, `Fecha publicación`, `
 ('ENFERMEROS DE CUIDADOS GENERALES', 'Burgos', '2025-11-05', '<p>OFERTA ENFERMERO/A PARA RESIDENCIA DE MAYORES UBICADA EN BURGOS CAPITAL. ES REQUISITO TENER TITULACION DEBIDAMENTE HOMOLOGADA EN ESPAÑA. OFRECEN CONTRATO INDEFINIDO. JORNADA 24 horas semana. SI REUNE EL PERFIL Y ESTA INTERESAD@ EN LA OFERTA DEBE ENVIAR UN EMAIL A ecylcalzadas.ofertas@jcyl.es (REF. 22542 ENEFERMERO/A) INDICANDO SU NOMBRE, APELLIDOS Y NUMERO DNI/NIE. SOLO SE ATENDERAN LAS CANDIDATURAS DE LAS PERSONAS QUE REUNIENDO EL PERFIL ESTEN INSCRITAS EN UNA OFICINA DE EMPLEO. MUCHAS GRACIAS</p><p>Para más información acuda a <a href=\'http://empleocastillayleon.jcyl.es/oficinavirtual/buscoEmpleoPub.do?srvc=ver&scope=reg&cod=371554\'>Oficina Virtual</a></p>', '', 'ECYL', '1179297447246', 'Burgos', '42.340823557', '-3.7020586908', '09', 1285576819334, '2025-11-05', 'https://empleo.jcyl.es/web/jcyl/Empleo/es/Plantilla100Detalle/1284216458054/OfertasEmpleo/1285576819334/Empleo', '42.3408235575, -3.70205869083'),
 ('CUIDADORES DE PERSONAS CON DISCAPACIDAD Y/O DEPENDENCIA, EN INSTITUCIONES', 'Burgos', '2025-10-31', '<p>Oferta de Empleo de CUIDADOR DE PERSONAS CON DEPENDENCIA para una residencia de mayores en la localidad de Rabe de las Calzadas (Burgos). Necesaria titulación de Auxiliar de Enfermería, Atención a la Dependencia o Certificado de Profesionalidad de Atención Sociosanitaria. Necesario disponer de vehículo si se vive fuera de la localidad. Se ofrece Contrato Indefinido a jornada Completa.</p><p>Para más información acuda a <a href=\'http://empleocastillayleon.jcyl.es/oficinavirtual/buscoEmpleoPub.do?srvc=ver&scope=reg&cod=371465\'>Oficina Virtual</a></p>', '', 'ECYL', '1179297605637', 'Rabe de las Calzadas', '42.33999', '-3.83461', '09', 1285575016019, '2025-10-31', 'https://empleo.jcyl.es/web/jcyl/Empleo/es/Plantilla100Detalle/1284216458054/OfertasEmpleo/1285575016019/Empleo', '42.33999, -3.83461'),
 ('COCINEROS, EN GENERAL', 'Zamora', '2025-10-29', '<p>Oferta N. 22312 de COCINERO/A para Zamora.\nLos interesados/as deben enviar su CV a ecyldoctorfleming.ofertas@jcyl.es (indicando en el asunto el N. de la oferta).\nCONDICIONES: Contrato indefinido a jornada completa. Salario de 1382,72 euros.</p><p>Para más información acuda a <a href=\'http://empleocastillayleon.jcyl.es/oficinavirtual/buscoEmpleoPub.do?srvc=ver&scope=reg&cod=371324\'>Oficina Virtual</a></p>', '', 'ECYL', '1179469491795', 'Zamora', '41.507324', '-5.745313', '49', 1285573980825, '2025-12-29', 'https://empleo.jcyl.es/web/jcyl/Empleo/es/Plantilla100Detalle/1284216458054/OfertasEmpleo/1285573980825/Empleo', '41.507324, -5.745313'),
-('CONDUCTORES-OPERADORES DE MAQUINARIA DE EXPLANACIÓN', 'Zamora', '2025-10-16', '<p>Oferta número 21599 de CONDUCTOR/A OPERADOR DE MAQUINARIA DE EXPLANACION para Zamora.\nLos interesados/as deben enviar su CV a ecyldoctorfleming.ofertas@jcyl.es (indicando en el asunto el número de la oferta)\nFUNCIONES: Maquinista de maquinaria de obra variada: manejo de maquinaria niveladora, retroexcavadora, mixta, pala y rodillo.\nCONDICIONES: contrato laboral indefinido.\nREQUISITOS: Experiencia mínima de 6 meses; permiso de conducir B; titulo de prevención de riesgos de 20 horas o titulo de prevención de riesgos albañileria de 20 horas.</p><p>Para más información acuda a <a href=\'http://empleocastillayleon.jcyl.es/oficinavirtual/buscoEmpleoPub.do?srvc=ver&scope=reg&cod=370611\'>Oficina Virtual</a></p>', '', 'ECYL', '1179469491795', 'Zamora', '41.507324', '-5.745313', '49', 1285569209697, '2025-12-30', 'https://empleo.jcyl.es/web/jcyl/Empleo/es/Plantilla100Detalle/1284216458054/OfertasEmpleo/1285569209697/Empleo', '41.507324, -5.745313');
+('CONDUCTORES-OPERADORES DE MAQUINARIA DE EXPLANACIÓN', 'Zamora', '2025-10-16', '<p>Oferta número 21599 de CONDUCTOR/A OPERADOR DE MAQUINARIA DE EXPLANACION para Zamora.\nLos interesados/as deben enviar su CV a ecyldoctorfleming.ofertas@jcyl.es (indicando en el asunto el número de la oferta)\nFUNCIONES: Maquinista de maquinaria de obra variada: manejo de maquinaria niveladora, retroexcavadora, mixta, pala y rodillo.\nCONDICIONES: contrato laboral indefinido.\nREQUISITOS: Experiencia mínima de 6 meses; permiso de conducir B; titulo de prevención de riesgos de 20 horas o titulo de prevención de riesgos albañileria de 20 horas.</p><p>Para más información acuda a <a href=\'http://empleocastillayleon.jcyl.es/oficinavirtual/buscoEmpleoPub.do?srvc=ver&scope=reg&cod=370611\'>Oficina Virtual</a></p>', '', 'ECYL', '1179469491795', 'Zamora', '41.507324', '-5.745313', '49', 1285569209697, '2025-12-30', 'https://empleo.jcyl.es/web/jcyl/Empleo/es/Plantilla100Detalle/1284216458054/OfertasEmpleo/1285569209697/Empleo', '41.507324, -5.745313'),
+('profesor php', 'ÁVILA', '2026-01-29', '1234', '', 'Web Propia', '05024', 'BECEDAS', '40,405156', '-5,634561', '02', 1769712790, '2026-01-29', '123525', '0'),
+('fernando', 'ÁVILA', '2026-01-29', '1234', '', 'Web Propia', '05024', 'BECEDAS', '40,405156', '-5,634561', '02', 1769712846, '2026-01-29', '123525', '0'),
+('fernando', 'BURGOS', '2026-01-29', '123455', '', 'Web Propia', '09001', 'ABAJAS', '42,623249', '-3,581763', '00', 1769712874, '2026-01-29', '12345', '0'),
+('PruebaCoordenadas', 'SEGOVIA', '2026-01-29', '12345', '', 'Junta de Castilla', '40014', 'ALDEHORNO', '41.512751', '-3.779377', '01', 1769713944, '2026-01-29', '12345', '-3.77937741.512751'),
+('pruebaCoordenadas', 'VALLADOLID', '2026-01-29', '123456', '', 'Junta de Castilla', '47015', 'BECILLA DE VALDERADUEY', '42.098502', '-5.218428', '01', 1769713958, '2026-01-29', '124', '-5.21842842.098502'),
+('programador', '47', '2026-01-29', '1234', '', 'Junta de Castilla', '', '', '0', '0', 'BE', 1769714979, '2026-01-29', '12345', ''),
+('programador2', '47', '2026-01-29', '12345', '', 'Junta de Castilla', '', '', '0', '0', 'AD', 1769714998, '2026-01-29', '123455', ''),
+('programador3', '47', '2026-01-29', '123455', '', 'Junta de Castilla', '', '', '0', '0', 'BA', 1769715135, '2026-01-29', '12342556', ''),
+('profesor php3', '47', '2026-01-29', '1235', '', 'Junta de Castilla', '', '', '0', '0', 'BA', 1769715347, '2026-01-29', '', ''),
+('profesor php', '37', '2026-01-29', '12345', '', 'Junta de Castilla', 'S/N', 'Localidad: ALDEANUEVA DE LA SIERRA', '0', '0', 'AL', 1769715555, '2026-01-29', '12345', '0,0'),
+('profesorado', '49', '2026-01-29', '1234', '', 'Junta de Castilla', '', '', '0', '0', 'AS', 1769715708, '2026-01-29', '1234', ''),
+('UltimoIntento', 'VALLADOLID', '2026-01-29', '1234', '', 'Junta de Castilla', '47016', 'BENAFARCES', '41.620989', '-5.293992', '01', 1769716119, '2026-01-29', '1234', '-5.29399241.620989'),
+('Limpiadora de casa', 'VALLADOLID', '2026-01-29', 'Limpiadora de casa 5h diarias', '', 'Junta de Castilla', '47052', 'CISTÉRNIGA', '41.612284', '-4.685702', '05', 1769718179, '2026-01-29', 'https://jcyl.qwefqrwgq', '-4.68570241.612284');
 
 -- --------------------------------------------------------
 
@@ -3061,6 +3074,7 @@ CREATE TABLE `usuarios` (
   `nombre_apellido` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `rol` enum('usuario','administrador') NOT NULL DEFAULT 'usuario',
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3068,15 +3082,20 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre_apellido`, `email`, `password`, `fecha_registro`) VALUES
-(1, 'USUARIO PRUEBA', 'usuarioPrueba@gmail.com', 'PruebaUsuario1234567890@!\"·$%&/()=', '2026-01-27 19:01:11'),
-(2, 'alejandro', 'aljeandro@email.com', '10111111', '2026-01-27 19:28:54'),
-(3, 'Prueba register', 'pruebaregister@register.com', '$2y$10$nNRzki8EtzRCFk4VI3OE4O8lfk38Ce/umsHyO1/U9EEXy6ux.3eBu', '2026-01-27 20:01:03'),
-(5, 'Funciona?', '3432rfwef@gmail.com', '$2y$10$79DYNI/mZZOpc9lVaLVPCO5YNn3OFKiSS4gFHo10yR2Qczr.Ky2z6', '2026-01-28 15:05:41'),
-(6, 'prueba captcha', 'pruebaC@gmail.com', '$2y$10$qLUMfZFZ8zXzXRczY7SIcOdzSEcZBczMiPL2LZB7ZZX36Rq1YNqia', '2026-01-28 15:26:03'),
-(7, 'cuentaPrueba', 'cuenta2@gmail.com', '$2y$10$ocR/401h0DF/REqZVZRkO.u8up5n3TfzzyLYT0qOg9K7E2JIad2wS', '2026-01-28 15:29:54'),
-(10, 'Funciona?', 'pruebaC3@gmail.com', '$2y$10$1x2zM8s6VYdLBwOmbRn6W.ae2dk5BK7dcZr79v/muwmFv/XmK6pBi', '2026-01-29 15:28:03'),
-(11, 'angel', 'angel@gmail.com', '$2y$10$rUbAKuEcrE0zDTCegb23G.A.unB2I7E8bKh2/TZ2KHrKkXgHsANpm', '2026-01-29 17:38:16');
+INSERT INTO `usuarios` (`id`, `nombre_apellido`, `email`, `password`, `rol`, `fecha_registro`) VALUES
+(1, 'USUARIO PRUEBA', 'usuarioPrueba@gmail.com', 'PruebaUsuario1234567890@!\"·$%&/()=', 'usuario', '2026-01-27 19:01:11'),
+(2, 'alejandro', 'aljeandro@email.com', '10111111', 'usuario', '2026-01-27 19:28:54'),
+(3, 'Prueba register', 'pruebaregister@register.com', '$2y$10$nNRzki8EtzRCFk4VI3OE4O8lfk38Ce/umsHyO1/U9EEXy6ux.3eBu', 'usuario', '2026-01-27 20:01:03'),
+(5, 'Funciona?', '3432rfwef@gmail.com', '$2y$10$79DYNI/mZZOpc9lVaLVPCO5YNn3OFKiSS4gFHo10yR2Qczr.Ky2z6', 'usuario', '2026-01-28 15:05:41'),
+(6, 'prueba captcha', 'pruebaC@gmail.com', '$2y$10$qLUMfZFZ8zXzXRczY7SIcOdzSEcZBczMiPL2LZB7ZZX36Rq1YNqia', 'usuario', '2026-01-28 15:26:03'),
+(7, 'cuentaPrueba', 'cuenta2@gmail.com', '$2y$10$ocR/401h0DF/REqZVZRkO.u8up5n3TfzzyLYT0qOg9K7E2JIad2wS', 'usuario', '2026-01-28 15:29:54'),
+(10, 'Funciona?', 'pruebaC3@gmail.com', '$2y$10$1x2zM8s6VYdLBwOmbRn6W.ae2dk5BK7dcZr79v/muwmFv/XmK6pBi', 'usuario', '2026-01-29 15:28:03'),
+(11, 'angel', 'angel@gmail.com', '$2y$10$rUbAKuEcrE0zDTCegb23G.A.unB2I7E8bKh2/TZ2KHrKkXgHsANpm', 'usuario', '2026-01-29 17:38:16'),
+(12, 'azucena', 'azucena@gmail.com', '$2y$10$xOUl4wRssr.ub9lCdvjtAum9HZb.RIBvbm13DYXAH/bn03GwBwwqm', 'usuario', '2026-01-29 20:21:52'),
+(14, 'funciona???', 'prueba34@gmail.com', '$2y$10$4CxRoRbBhfNLvnf/lIq8hejhqF/X5AAxBfMX87zW1SAERJ8Uh6o8m', 'administrador', '2026-01-30 14:56:40'),
+(16, 'Administrador Principal', 'admin@gmail.com', '$2y$10$W1iBtj70xJM702HPaZAVc.oHK881rdhiKCV/HjazK/P75F1nzOD5.', 'administrador', '2026-01-30 19:15:46'),
+(17, 'PruebaPostCambio', 'prueba8@gmail.com', '$2y$10$C2Jze3dk4EGOS8NLkyorwuXxp/XYqHaN3oOCpjcWbm59Vodot7/Ni', 'usuario', '2026-01-30 19:31:18'),
+(18, 'prueba3', 'prueba10@gmail.com', '$2y$10$TyEwlPmhwgeGa/rR.J8k/elWA4f25wHMJMryBc8t3lQfHvFdYlWEK', 'usuario', '2026-01-30 19:40:00');
 
 --
 -- Índices para tablas volcadas
@@ -3097,7 +3116,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

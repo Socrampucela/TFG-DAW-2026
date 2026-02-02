@@ -75,8 +75,8 @@ $usuarios = $usuarioDAO->mostrarTodos();
                         echo "<td class='px-4 py-4'><span class='px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide $badgeStyle'>" . $usuario['rol'] . "</span></td>"; 
                         echo "<td class='px-4 py-4 text-sm text-gray-400'>$fecha</td>"; 
                         echo "<td class='px-4 py-4 text-right text-sm font-bold space-x-4'>
-                                <a href='editar.php?id=$usuario[id]' class='text-gray-400 hover:text-principal-600 transition-colors'>Editar</a>
-                                <a href='eliminar.php?id=$usuario[id]' 
+                                <a href='editarUsuario.php?id=$usuario[id]' class='text-gray-400 hover:text-principal-600 transition-colors'>Editar</a>
+                                <a href='../ASSETS/php/borrarUsuario.php?id=$usuario[id]' 
                                    onclick=\"return confirm('¿Eliminar a $nombre?')\"
                                    class='text-gray-400 hover:text-red-500 transition-colors'>
                                    Borrar

@@ -223,5 +223,10 @@ class UsuarioDAO {
             ];
         }
     }
-    
+    public function borrarUsuario($id) {
+    $sql = "DELETE FROM `usuarios` WHERE `id` = :id";
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([':id' => $id]);
+} 
+   
 }

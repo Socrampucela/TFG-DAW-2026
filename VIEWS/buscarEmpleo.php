@@ -111,7 +111,7 @@ require_once("../config/db.php");
 </main>
 
 
-<script src="../ASSETS/js/provincias.js"></script>
+
 <script src="../ASSETS/js/buscarEmpleo.js"></script>
 <?php  include '../INCLUDES/footer.php'; ?>
 </body>

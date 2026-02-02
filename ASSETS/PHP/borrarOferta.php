@@ -1,11 +1,11 @@
 <?php
 include_once "../../DAO/empleoDAO.php";
 include_once "../../config/db.php";
+include_once "../../CLASSES/usuario.php";
 session_start();
 
 
 if (!isset($_SESSION['nombre'])) { header("Location: ../../VIEWS/login.php"); exit; }
-
 $Empleodao = new EmpleoDAO($conn);
 $id = $_GET['id'] ?? null;
 

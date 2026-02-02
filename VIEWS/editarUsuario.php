@@ -23,9 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'rol'             => $_POST['rol']
     ];
 
-    if (!empty($_POST['password'])) {
-        $datosActualizar['password'] = $_POST['password'];
-    }
     
     // Llamada a tu función dinámica con el casting a int por seguridad
     if ($dao->actualizar((int)$id, $datosActualizar)) {
@@ -63,10 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <div>
-                    <label class="form-label">Nueva Contraseña (dejar vacío para no cambiar)</label>
-                    <input type="password" name="password" class="form-input" placeholder="••••••••">
-                </div>
 
                 <div>
                     <label class="form-label">Rol del Sistema</label>

@@ -64,9 +64,9 @@ function esAdmin() {
                         <div class="px-4 py-2 text-xs text-purple-400 uppercase font-bold tracking-wider">
                             Administración
                         </div>
-                        <a href="admin/dashboard.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">Panel de control</a>
-                        <a href="admin/usuarios.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">Gestionar usuarios</a>
-                        <a href="admin/empleos.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">Gestionar empleos</a>
+                        <a href="dashboard.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">Panel de control</a>
+                        <a href="usuarios.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">Gestionar usuarios</a>
+                        <a href="empleos.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">Gestionar empleos</a>
                     <?php endif; ?>
 
                     <hr class="my-1 border-gray-100">

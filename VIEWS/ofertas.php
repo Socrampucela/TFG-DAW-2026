@@ -13,7 +13,7 @@ $urlParams = http_build_query($filtros);
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"><title>Gestión de Ofertas</title>
+    <meta charset="UTF-8"><title>Ofertas - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -38,7 +38,7 @@ $urlParams = http_build_query($filtros);
     </style>
 </head>
 <body class="bg-[#FAFAFA] text-[var(--c-primary)] text-xs antialiased">
-
+<?php include_once "../includes/header.php"; ?>
 <div class="flex min-h-screen p-4 gap-6 justify-center">
     <?php $pagina_actual = 'ofertas'; include_once "../includes/sideNavAdmin.php"; ?>
 
@@ -104,5 +104,8 @@ $urlParams = http_build_query($filtros);
         </div>
     </main>
 </div>
+<?php  include '../INCLUDES/footer.php';
+
+?>
 </body>
 </html>

@@ -1,12 +1,12 @@
 <?php
 require_once("../config/db.php");
-require_once('../INCLUDES/common-functions.php');
+require_once('../INCLUDES/funciones-comunes.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php renderHead('Buscar ofertas - Empleo360'); ?>
-    <?php renderCommonTailwindStyles(); ?>
+    <?php renderizarHead('Buscar ofertas - Empleo360'); ?>
+    <?php renderizarEstilosTailwind(); ?>
     
 </head>
 <body class="bg-gray-50">
@@ -34,7 +34,7 @@ require_once('../INCLUDES/common-functions.php');
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Provincia</label>
-                    <?php renderProvinciasSelect($conn, 'provincia', 'select-provincia'); ?>
+                    <?php renderizarSelectProvincias($conn, 'provincia', 'select-provincia'); ?>
                 </div>
 
                 <div>

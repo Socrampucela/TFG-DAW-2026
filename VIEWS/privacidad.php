@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - Empleo360</title>
-    <link rel="stylesheet" href="../ASSETS/css/components.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
     @layer components {

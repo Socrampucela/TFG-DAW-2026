@@ -59,7 +59,7 @@ $usuarios = $usuarioDAO->mostrarTodos();
                 <h1 class="text-2xl font-bold text-gray-800">Gestión de Usuarios</h1>
                 <p class="text-gray-400 text-sm mt-1">Total: <?= count($usuarios) ?> registros</p>
             </div>
-            <a href="register.php" class="bg-principal-600 hover:bg-principal-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all shadow-md">
+            <a href="register.php" class="btn-primary !w-auto !py-2 !px-4 !text-xs !shadow-none">
                 + Nuevo Usuario
             </a>
         </div>

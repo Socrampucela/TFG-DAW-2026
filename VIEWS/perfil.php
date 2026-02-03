@@ -31,8 +31,10 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
 
 <body class="
+  min-h-screen flex flex-col
   bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
 ">
+
 
 
   <?php include("../INCLUDES/header.php"); ?>
@@ -42,7 +44,8 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
   <!-- modalOverlay aquí -->
 
 
-  <main class="max-w-6xl mx-auto px-4 py-8">
+  <main class="flex-1 max-w-6xl mx-auto px-4 py-8">
+
     <div class="flex items-end justify-between gap-4 mb-6">
       <div>
         <h1 class="text-2xl font-semibold">Perfil</h1>
@@ -55,63 +58,69 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
     <div id="toast" class="hidden mb-4 p-4 rounded-lg border"></div>
 
     <!-- “Display” tipo tabla como tu captura -->
-    <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-  <div class="overflow-x-auto">
-    <table class="w-full min-w-[900px] table-fixed text-left">
-      <thead class="bg-gray-50 text-xs uppercase tracking-wide text-gray-600">
-        <tr>
-          <th class="px-6 py-4 w-[26%]">Nombre</th>
-          <th class="px-6 py-4 w-[30%]">Email</th>
-          <th class="px-6 py-4 w-[16%]">Rol</th>
-          <th class="px-6 py-4 w-[16%]">Fecha</th>
-          <th class="px-6 py-4 w-[12%] text-right">Acciones</th>
-        </tr>
-      </thead>
+   <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+  <div class="p-6 sm:p-8">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-900">Datos de tu cuenta</h2>
+        <p class="text-sm text-gray-600 mt-1">Revisa y gestiona la información del perfil.</p>
+      </div>
 
-      <tbody class="divide-y divide-gray-100">
-        <tr class="hover:bg-gray-50/60 align-middle">
-          <td class="px-6 py-5 font-medium text-gray-800 whitespace-nowrap" id="tdNombre">
-            <?= h($u["nombre_apellido"]) ?>
-          </td>
+      <div class="flex items-center gap-2">
+        <button id="btnEditPerfil"
+                class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 text-sm font-semibold"
+                type="button"
+                title="Editar perfil"
+                aria-label="Editar perfil">
+          ✏️ <span class="hidden sm:inline">Editar</span>
+        </button>
 
-          <td class="px-6 py-5 text-gray-700 whitespace-nowrap" id="tdEmail">
-            <?= h($u["email"]) ?>
-          </td>
+        <button id="btnDeletePerfil"
+                class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-red-200 hover:bg-red-50 text-sm font-semibold text-red-700"
+                type="button"
+                title="Eliminar cuenta"
+                aria-label="Eliminar cuenta">
+          🗑️ <span class="hidden sm:inline">Eliminar</span>
+        </button>
+      </div>
+    </div>
 
-          <td class="px-6 py-5 text-gray-700 whitespace-nowrap">
-            <?= h($u["rol"]) ?>
-          </td>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- Nombre -->
+      <div class="rounded-xl border border-gray-200 bg-white p-4">
+        <p class="text-xs font-bold tracking-widest text-gray-500 uppercase">Nombre</p>
+        <p class="mt-2 text-gray-900 font-semibold" id="tdNombre">
+          <?= h($u["nombre_apellido"]) ?>
+        </p>
+      </div>
 
-          <td class="px-6 py-5 text-gray-700 whitespace-nowrap">
-            <?= h(substr((string)$u["fecha_registro"], 0, 10)) ?>
-          </td>
+      <!-- Email -->
+      <div class="rounded-xl border border-gray-200 bg-white p-4">
+        <p class="text-xs font-bold tracking-widest text-gray-500 uppercase">Email</p>
+        <p class="mt-2 text-gray-900 font-semibold break-all" id="tdEmail">
+          <?= h($u["email"]) ?>
+        </p>
+      </div>
 
-          <td class="px-6 py-5">
-            <div class="flex items-center justify-end gap-2">
-              <!-- Editar perfil -->
-              <button id="btnEditPerfil"
-                      class="p-2 rounded-md hover:bg-gray-100"
-                      type="button"
-                      title="Editar perfil"
-                      aria-label="Editar perfil">
-                ✏️
-              </button>
+      <!-- Rol -->
+      <div class="rounded-xl border border-gray-200 bg-white p-4">
+        <p class="text-xs font-bold tracking-widest text-gray-500 uppercase">Rol</p>
+        <p class="mt-2 text-gray-900 font-semibold">
+          <?= h($u["rol"]) ?>
+        </p>
+      </div>
 
-              <!-- Eliminar cuenta -->
-              <button id="btnDeletePerfil"
-                      class="p-2 rounded-md hover:bg-gray-100 text-red-600"
-                      type="button"
-                      title="Eliminar cuenta"
-                      aria-label="Eliminar cuenta">
-                🗑️
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- Fecha -->
+      <div class="rounded-xl border border-gray-200 bg-white p-4">
+        <p class="text-xs font-bold tracking-widest text-gray-500 uppercase">Fecha de registro</p>
+        <p class="mt-2 text-gray-900 font-semibold">
+          <?= h(substr((string)$u["fecha_registro"], 0, 10)) ?>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
+
 
   </main>
 

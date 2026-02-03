@@ -10,7 +10,7 @@
 ============================================ */
 :root {
   --c-primary: #2B2F33;
-  --c-secondary: #2EA8FF; /* Azul Header */
+  --c-secondary: #0B1F3A;
   --c-accent: #F59E0B;
   --c-bg: #F5F7FA;
   --c-surface: #FFFFFF;
@@ -81,9 +81,9 @@ body {
   margin: 0 0 6px;
   font-size: 26px;
   letter-spacing: -.2px;
-  color: var(--c-primary);
-  font-weight: 800;
+  color: #0B1F3A;          /* ← azul del header */
 }
+
 
 .page-subtitle {
   margin: 0 0 18px;
@@ -166,7 +166,8 @@ body {
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid transparent;
-  background: var(--c-secondary);
+  background-color: var(--c-secondary); /* ← clave */
+  background-image: none;
   color: #fff;
   font-weight: 750;
   cursor: pointer;
@@ -295,10 +296,10 @@ body {
 ============================================ */
 .site-footer {
   width: 100%;
-  border-top: 1px solid rgba(229, 231, 235, .9);
-  background: #fff;
-  color: var(--muted);
-  margin-top: auto; /* Empuja el footer abajo si hay poco contenido */
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  background: #0B1F3A;           /* ← mismo azul que el header */
+  color: rgba(255, 255, 255, .85); 
+  margin-top: auto; 
 }
 
 .site-footer__inner {
@@ -312,12 +313,22 @@ body {
   font-size: 13px;
 }
 
+/* Enlaces del footer en blanco suave */
 .site-footer__link {
-  color: var(--c-secondary);
+  color: rgba(255, 255, 255, .90);
   text-decoration: none;
   font-weight: 650;
 }
-.site-footer__link:hover { text-decoration: underline; }
+
+.site-footer__link:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+/* Texto secundario más tenue (si usas esta clase) */
+.site-footer__meta {
+  color: rgba(255, 255, 255, .65);
+}
 
 /* ============================================
    RESPONSIVE (MÓVIL)

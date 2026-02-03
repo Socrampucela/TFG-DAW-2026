@@ -130,10 +130,15 @@ if (!function_exists('esAdmin')) {
                     Entrar
                 </a>
 
-                <a href="register.php"
-                   class="inline-flex items-center justify-center rounded-xl bg-[#2EA8FF] hover:brightness-110 text-white font-bold text-sm px-4 py-2 transition shadow-sm">
-                    Registrarse
-                </a>
+               <a href="register.php"
+   class="inline-flex items-center justify-center rounded-xl
+          bg-white/85 text-[#0B1F3A] font-bold text-sm px-4 py-2 transition
+          ring-1 ring-white/20
+          shadow-[0_10px_28px_rgba(0,0,0,.22)]
+          hover:bg-white">
+  Registrarse
+</a>
+
             <?php endif; ?>
 
 

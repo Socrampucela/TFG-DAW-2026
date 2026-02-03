@@ -22,11 +22,13 @@ require_once('../INCLUDES/funciones-comunes.php');
             <p class="text-gray-500 mt-2 text-lg" id="totalText">Cargando ofertas...</p>
         </div>
         
-        <div>
-            <a href="mapa.php" class="btn-primary !w-auto inline-flex items-center justify-center !bg-[#2b2f33]">
-                🗺️ Ver mapa
-            </a>
-        </div>
+        <div class="mb-6 -mt-2">
+  <a href="mapa.php"
+     class="btn-primary !w-auto !bg-[#0B1F3A]">
+    🗺️ Ver mapa
+  </a>
+</div>
+
 
         <!-- Filtros -->
         <section class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-8">

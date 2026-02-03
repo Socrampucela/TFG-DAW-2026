@@ -10,12 +10,15 @@ $datosAlerta = obtenerMensajeDeGet();
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="
+  min-h-screen flex flex-col
   bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
 ">
 
+
     <?php include("../includes/header.php"); ?>
 
-    <main class="flex-grow flex justify-center items-start py-10 px-4">
+    <main class="flex-1 flex justify-center items-start py-10 px-4">
+
         <section class="panel">
             <div class="panel__inner">
                 <h1 class="page-title">Iniciar sesión</h1>

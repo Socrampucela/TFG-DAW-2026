@@ -30,7 +30,10 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 </head>
 
 
-<body class="min-h-screen bg-gray-50">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
 
   <?php include("../INCLUDES/header.php"); ?>
 

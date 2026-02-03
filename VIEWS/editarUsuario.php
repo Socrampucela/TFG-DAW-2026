@@ -53,7 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 </style>
 </head>
-<body class="page-center">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
 
     <div class="panel">
         <div class="panel__inner">

@@ -36,7 +36,10 @@ require_once '../INCLUDES/funciones-comunes.php';
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
     <?php include("../includes/header.php"); ?>
 
     <main class="flex-grow flex justify-center items-start py-10 px-4">

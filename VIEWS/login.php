@@ -9,7 +9,10 @@ $datosAlerta = obtenerMensajeDeGet();
     <?php renderizarEstilosTailwind(); ?>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
     <?php include("../includes/header.php"); ?>
 
     <main class="flex-grow flex justify-center items-start py-10 px-4">

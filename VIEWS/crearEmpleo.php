@@ -23,7 +23,10 @@ include "../INCLUDES/header.php";
         }
     </style>
 </head>
-<body class="bg-[var(--c-bg)]">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
 
 <main class="flex-grow flex justify-center items-start py-10 px-4">
     <section class="panel" style="width:100%; max-width:520px;">

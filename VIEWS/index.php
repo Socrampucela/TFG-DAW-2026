@@ -22,7 +22,10 @@ $mostrarAlerta = isset($_GET["error"]) && $_GET["error"] === "login_required";
     <?php renderizarHead('Portal de empleos - Empleo360'); ?>
     <?php renderizarEstilosTailwind(); ?>
 </head>
-<body class="bg-gray-50">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
     <?php include("../includes/header.php"); ?>
     
     <main class="max-w-6xl mx-auto py-12 px-6">

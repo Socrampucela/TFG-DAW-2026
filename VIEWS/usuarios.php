@@ -44,7 +44,10 @@ $usuarios = $usuarioDAO->mostrarTodos();
         }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
 <?php include_once "../includes/header.php"; ?>
 <div class="max-w-6xl mx-auto my-10 bg-white shadow-xl rounded-xl overflow-hidden flex flex-col md:flex-row border border-gray-200">
     

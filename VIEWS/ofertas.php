@@ -31,7 +31,10 @@ $urlParams = http_build_query($filtros);
         .btn-pagination { @apply !w-auto !py-1 !px-3 !text-xs !shadow-none; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="
+  bg-[linear-gradient(135deg,#F5F4F0_0%,#F2F2EE_40%,#EDECE8_100%)]
+">
+
 
 <?php include_once "../includes/header.php"; ?>
 

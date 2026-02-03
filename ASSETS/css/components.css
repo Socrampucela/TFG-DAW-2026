@@ -102,7 +102,7 @@
   margin-bottom: 6px;
 }
 
-.form-input {
+.form-input,.input, .select {
   width: 100%;
   padding: 12px 12px;
   border-radius: 12px;

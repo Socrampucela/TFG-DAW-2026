@@ -5,9 +5,10 @@ require_once('../INCLUDES/funciones-comunes.php');
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php renderizarHead('Buscar ofertas - Empleo360'); ?>
-    <?php renderizarEstilosTailwind(); ?>
     
+    <?php renderizarHead('Buscar ofertas - Empleo360'); ?>
+    <link rel="stylesheet" href="../ASSETS/css/components.css">
+
 </head>
 <body class="bg-gray-50">
     <?php include("../includes/header.php"); ?>

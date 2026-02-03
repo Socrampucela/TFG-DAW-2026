@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     
-    // Llamada a tu función dinámica con el casting a int por seguridad
     if ($dao->actualizar((int)$id, $datosActualizar)) {
         header("Location: usuarios.php?msg=updated");
         die();
@@ -38,6 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Modificar Usuario</title>
     <link rel="stylesheet" href="../ASSETS/css/components.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+    @layer components {
+        .grid-2 { 
+            @apply grid grid-cols-1 md:grid-cols-2 gap-4; 
+        }
+        .panel { 
+            @apply w-full max-w-[520px] mx-auto; 
+        }
+    }
+    @media (max-width: 640px) {
+        .page-center { @apply p-4 flex flex-col items-center justify-start !important; }
+        .page-title { @apply text-2xl !important; }
+        .btn-primary { @apply w-full justify-center !important; }
+    }
+</style>
 </head>
 <body class="page-center">
 

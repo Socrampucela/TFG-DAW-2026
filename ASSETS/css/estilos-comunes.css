@@ -1,0 +1,223 @@
+/* ============================================
+   ESTILOS COMUNES - Empleo360
+   ============================================ */
+
+/* Variables CSS */
+:root {
+    --c-primary: #2B2F33;
+    --c-secondary: #3882B6;
+    --c-accent: #F59E0B;
+    --c-bg: #FAFAFA;
+    --c-surface: #FFFFFF;
+    --c-muted: rgba(43,47,51,.70);
+    --radius: 14px;
+    --border: 1px solid rgba(43,47,51,.14);
+    --shadow: 0 18px 45px rgba(0,0,0,.10);
+}
+
+/* Layout común */
+.panel {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.panel-table {
+    background: var(--c-surface);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Formularios */
+.form-input-custom,
+.input-field,
+.input,
+.select {
+    width: 100%;
+    background: var(--c-surface);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-input-custom:focus,
+.input-field:focus,
+.input:focus,
+.select:focus {
+    border-color: var(--c-secondary);
+    ring: 2px;
+    ring-color: rgba(56, 130, 182, 0.2);
+}
+
+/* Botones */
+.btn-custom,
+.btn-primary {
+    background: var(--c-secondary);
+    color: var(--c-surface);
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-custom:hover,
+.btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+/* Tarjetas de trabajo */
+.job-card {
+    background: var(--c-surface);
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.job-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+/* Tablas */
+.table-header {
+    background-color: #f8fafc;
+    color: var(--c-muted);
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* Alertas */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.alert-Exito {
+    background: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.alert-Error {
+    background: #fef2f2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.alert-Advertencia {
+    background: #fffbeb;
+    color: #d97706;
+    border-color: #fde68a;
+}
+
+/* Contenido legal */
+.legal-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.legal-content h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.legal-content p {
+    color: #4b5563;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.legal-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: #4b5563;
+}
+
+/* Grid responsivo */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .panel,
+    .panel-table {
+        margin: 0 0.5rem;
+    }
+    
+    .page-title {
+        font-size: 1.5rem !important;
+    }
+    
+    .page-subtitle {
+        font-size: 0.875rem !important;
+    }
+    
+    .panel__inner {
+        padding: 1.5rem !important;
+    }
+    
+    .form-input-custom,
+    .input-field,
+    .input,
+    .select {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+    
+    .btn-primary,
+    .btn-custom {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .legal-content p {
+        text-align: left;
+        font-size: 0.875rem;
+    }
+    
+    .legal-content h3 {
+        font-size: 1.25rem;
+    }
+    
+    .legal-content h4 {
+        font-size: 1.125rem;
+    }
+}

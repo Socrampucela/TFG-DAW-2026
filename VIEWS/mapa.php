@@ -1,7 +1,7 @@
 <?php
 // 1. Carga de datos
 require_once("../config/db.php");
-require_once("../DAO/EmpleoDAO.php"); // Ojo: Revisa si es EmpleoDAO o empleoDAO
+require_once("../DAO/EmpleoDAO.php"); 
 $empleos = (new EmpleoDAO($conn))->obtenerTodos();
 ?>
 
@@ -15,7 +15,23 @@ $empleos = (new EmpleoDAO($conn))->obtenerTodos();
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-    
+    <style>
+
+    #map { 
+        width: 100%; 
+        height: 60vh;
+        min-height: 350px; 
+        max-height: 700px;
+        background: #eee; 
+        border-bottom: 1px solid #ccc; 
+    }
+
+    @media (max-width: 640px) {
+        #map { height: 50vh; }
+
+        .leaflet-popup-content { font-size: 14px; width: 160px !important; }
+    }
+</style>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 

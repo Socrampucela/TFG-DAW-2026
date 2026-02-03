@@ -14,6 +14,19 @@ $usuarios = $usuarioDAO->mostrarTodos();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+            @layer components {
+                .job-card { @apply bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between; }
+                .input-field { @apply w-full bg-white border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-200; }
+            }
+            
+            /* Ajustes finos para móvil */
+            @media (max-width: 640px) {
+                .page-header { @apply mb-6; }
+                .filter-section { @apply p-4; }
+                #totalText { @apply text-base; }
+            }
+        </style>
     <script>
         tailwind.config = {
           theme: {

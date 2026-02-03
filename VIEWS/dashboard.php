@@ -18,6 +18,19 @@ if(esAdmin()){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadísticas - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .job-card { @apply bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between; }
+            .input-field { @apply w-full bg-white border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-200; }
+        }
+        
+        /* Ajustes finos para móvil */
+        @media (max-width: 640px) {
+            .page-header { @apply mb-6; }
+            .filter-section { @apply p-4; }
+            #totalText { @apply text-base; }
+        }
+    </style>
     <script>
         tailwind.config = {
           theme: {
@@ -52,7 +65,7 @@ if(esAdmin()){
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h1 class="text-2xl font-bold text-gray-800">Panel de Control</h1>
-                        <p class="text-gray-400 text-sm mt-1">Bienvenido, <?= htmlspecialchars($_SESSION['nombre']) ?></p>
+                        <p class="text-gray-400 text-sm mt-1">Bienvenido, <?= ($_SESSION['nombre']) ?></p>
                     </div>
                 </div>
 
@@ -66,6 +79,7 @@ if(esAdmin()){
                 </div>
 
                 <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-inner relative h-[450px]">
+                    
                     <canvas id="graficoAdmin"></canvas>
                 </div>
             </div>

@@ -4,6 +4,15 @@ require_once "../CONFIG/db.php";
 
 if(isset($_SESSION['nombre'])){ ?>
 <main class="flex-grow flex justify-center items-start py-10 px-4">
+    <style>
+    
+        @media (max-width: 640px) {
+            main { padding: 1rem !important; }
+            .panel { max-width: 100% !important; margin: 0 !important; }
+            .page-title { font-size: 1.5rem !important; }
+        }
+    </style>
+<main class="flex-grow flex justify-center items-start py-10 px-4">
     <section class="panel" style="width:100%; max-width:520px;">
         <div class="panel__inner">
             <h1 class="page-title">Crear una oferta de empleo</h1>

@@ -6,15 +6,22 @@
     <title>Aviso Legal y Condiciones de Uso - Empleo360</title>
     <link rel="stylesheet" href="../ASSETS/css/components.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .legal-content h3 { @apply text-2xl font-bold text-slate-800 mt-10 mb-4 border-b pb-2; }
-        .legal-content h4 { @apply text-xl font-semibold text-slate-700 mt-8 mb-3; }
+        <style type="text/tailwindcss">
+    @layer components {
+        .legal-content h3 { @apply text-2xl font-bold text-slate-800 mt-8 mb-4 border-b pb-2; }
+        .legal-content h4 { @apply text-xl font-semibold text-slate-700 mt-6 mb-3; }
         .legal-content p { @apply text-gray-600 leading-relaxed mb-4 text-justify; }
         .legal-content ul { @apply list-disc pl-6 mb-4 text-gray-600; }
-        .legal-content li { @apply mb-2; }
-        .info-box { @apply bg-slate-50 p-6 rounded-lg border border-slate-200 mb-8; }
-        .highlight { @apply text-blue-600 font-bold; }
-    </style>
+    }
+
+    @media (max-width: 640px) {
+        .legal-content p { @apply text-left text-sm !important; }
+        .legal-content h3 { @apply text-xl !important; }
+        .legal-content h4 { @apply text-lg !important; }
+        .panel__inner { @apply p-6 !important; }
+        .page-title { @apply text-3xl !important; }
+    }
+</style>
 </head>
 <body class="bg-gray-50">
 

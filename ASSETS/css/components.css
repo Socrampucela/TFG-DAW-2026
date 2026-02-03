@@ -1,43 +1,50 @@
 /* ============================================
+   RESET BÁSICO (Vital para layouts)
+============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ============================================
    VARIABLES
 ============================================ */
-
 :root {
   --c-primary: #2B2F33;
-
-  /* 🔹 NUEVO AZUL (mismo tono que el header) */
-  --c-secondary: #2EA8FF;
-
+  --c-secondary: #2EA8FF; /* Azul Header */
   --c-accent: #F59E0B;
-
-  /* 🔹 NUEVO FONDO: blanco roto más elegante */
   --c-bg: #F5F7FA;
-
-  /* 🔹 Superficie de tarjetas/paneles un poco más limpia */
   --c-surface: #FFFFFF;
 
   --radius: 14px;
   --border: 1px solid rgba(43, 47, 51, .14);
   --shadow: 0 18px 45px rgba(0, 0, 0, .10);
+  
   --text: var(--c-primary);
   --muted: rgba(43, 47, 51, .70);
+  
+  /* Truco: Usamos el mismo azul pero con transparencia para el foco */
   --focus: 0 0 0 3px rgba(46, 168, 255, .22);
 }
 
 /* ============================================
    LAYOUT GENERAL
 ============================================ */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--c-bg);
+  color: var(--text);
+}
 
 .page-center {
   min-height: 100dvh;
-  background: var(--c-bg);
   display: grid;
   place-items: center;
   padding: 32px 16px;
-  color: var(--text);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  position: relative; /* Necesario para el ::before */
 }
 
+/* Fondo decorativo */
 .page-center::before {
   content: "";
   position: fixed;
@@ -46,17 +53,17 @@
   background:
     radial-gradient(900px 520px at 20% 15%, rgba(56, 130, 182, .16), transparent 60%),
     radial-gradient(900px 520px at 85% 20%, rgba(245, 158, 11, .12), transparent 55%);
+  z-index: -1;
 }
 
 /* ============================================
-   PANEL
+   COMPONENTES: PANEL
 ============================================ */
-
 .panel {
   position: relative;
   width: 100%;
   max-width: 520px;
-  background: #fff;
+  background: var(--c-surface);
   border: var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -64,18 +71,18 @@
 }
 
 .panel__inner {
-  padding: 22px 22px 20px;
+  padding: 22px;
 }
 
 /* ============================================
-   TÍTULOS
+   TIPOGRAFÍA
 ============================================ */
-
 .page-title {
   margin: 0 0 6px;
   font-size: 26px;
   letter-spacing: -.2px;
   color: var(--c-primary);
+  font-weight: 800;
 }
 
 .page-subtitle {
@@ -86,51 +93,47 @@
 }
 
 /* ============================================
-   FORMULARIO
+   FORMULARIOS
 ============================================ */
-
 .form {
   display: grid;
   gap: 14px;
 }
 
 .form-label {
-  display: inline-block;
+  display: block; /* Mejor block que inline-block para etiquetas */
   font-size: 13px;
   font-weight: 650;
   color: var(--c-primary);
   margin-bottom: 6px;
 }
 
-.form-input,.input, .select {
+/* Agrupamos todos los inputs */
+.form-input, 
+.input, 
+.select {
   width: 100%;
-  padding: 12px 12px;
+  padding: 12px;
   border-radius: 12px;
   border: var(--border);
   background: #fff;
   color: var(--c-primary);
   outline: 0;
-  transition:
-    box-shadow .15s ease,
-    border-color .15s ease,
-    transform .05s ease;
+  font-size: 15px; /* Tamaño legible base */
+  transition: box-shadow .15s ease, border-color .15s ease;
 }
 
-.form-input::placeholder {
-  color: rgba(43, 47, 51, .45);
-}
-
-.form-input:focus {
-  border-color: rgba(56, 130, 182, .55);
+.form-input:focus, 
+.input:focus, 
+.select:focus {
+  border-color: var(--c-secondary); /* Usamos la variable */
   box-shadow: var(--focus);
 }
 
-.form-input:hover {
-  border-color: rgba(43, 47, 51, .22);
-}
+.form-input::placeholder { color: rgba(43, 47, 51, .45); }
+.form-input:hover { border-color: rgba(43, 47, 51, .35); }
 
-/* Links bajo el formulario */
-
+/* Links y Separadores */
 .form-links {
   margin-top: 10px;
   text-align: center;
@@ -144,74 +147,21 @@
   text-decoration: none;
 }
 
-.form-links a:hover {
-  text-decoration: underline;
-}
-
-/* Divider */
+.form-links a:hover { text-decoration: underline; }
 
 .divider {
   height: 1px;
   background: rgba(229, 231, 235, .9);
-  margin: 12px 0 6px;
+  margin: 16px 0;
 }
 
 /* ============================================
-   GRID
+   BOTONES
 ============================================ */
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-
-@media (min-width: 520px) {
-  .grid-2 {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .col-span-2 {
-    grid-column: span 2;
-  }
-}
-
-/* ============================================
-   CHECKBOX Y CAPTCHA
-============================================ */
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-top: 2px;
-  font-size: 14px;
-  color: var(--c-primary);
-}
-
-.checkbox-row input {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--c-secondary);
-}
-
-.captcha-wrap {
-  display: flex;
-  justify-content: flex-start;
-}
-
-@media (max-width: 420px) {
-  .captcha-wrap {
-    transform: scale(.92);
-    transform-origin: left top;
-  }
-}
-
-/* ============================================
-   BOTÓN PRINCIPAL
-============================================ */
-
 .btn-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
@@ -221,17 +171,13 @@
   font-weight: 750;
   cursor: pointer;
   box-shadow: 0 14px 22px rgba(46, 168, 255, .22);
-
-  transition:
-    filter .15s ease,
-    transform .05s ease,
-    box-shadow .15s ease;
+  transition: filter .15s ease, transform .05s ease, box-shadow .15s ease;
+  text-decoration: none; /* Por si se aplica a un <a> */
 }
 
 .btn-primary:hover {
   filter: brightness(1.06);
   box-shadow: 0 16px 28px rgba(46, 168, 255, .26);
-
 }
 
 .btn-primary:active {
@@ -239,15 +185,120 @@
 }
 
 /* ============================================
+   GRID & UTILS
+============================================ */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* Versión escritorio del grid */
+@media (min-width: 520px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .col-span-2 { grid-column: span 2; }
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2px;
+  font-size: 14px;
+}
+
+.checkbox-row input {
+  width: 18px; 
+  height: 18px;
+  accent-color: var(--c-secondary);
+  cursor: pointer;
+}
+
+/* ============================================
+   ALERTS
+============================================ */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+.alert-Exito { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+.alert-Error { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+.alert-Advertencia { background: #fffbeb; color: #d97706; border-color: #fde68a; }
+
+/* ============================================
+   CARDS DE EMPLEO
+============================================ */
+.job-card {
+  background: var(--c-surface);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  cursor: pointer;
+}
+
+.job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--c-secondary);
+}
+
+.job-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.job-card__meta {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.job-card__footer {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* FALTABA ESTE TAG */
+.tag-provincia {
+    background: rgba(46, 168, 255, 0.1); /* Azul muy suave */
+    color: var(--c-secondary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* ============================================
    FOOTER
 ============================================ */
-
 .site-footer {
   width: 100%;
   border-top: 1px solid rgba(229, 231, 235, .9);
   background: #fff;
   color: var(--muted);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin-top: auto; /* Empuja el footer abajo si hay poco contenido */
 }
 
 .site-footer__inner {
@@ -261,158 +312,32 @@
   font-size: 13px;
 }
 
-.site-footer__meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: rgba(43, 47, 51, .55);
-}
-
 .site-footer__link {
   color: var(--c-secondary);
   text-decoration: none;
   font-weight: 650;
 }
+.site-footer__link:hover { text-decoration: underline; }
 
-.site-footer__link:hover {
-  text-decoration: underline;
-}
+/* ============================================
+   RESPONSIVE (MÓVIL)
+============================================ */
+@media (max-width: 640px) {
+  .panel, .panel-table { margin: 0; width: 100%; }
+  
+  .page-title { font-size: 24px !important; }
+  .page-subtitle { font-size: 14px !important; }
+  
+  .panel__inner { padding: 20px !important; }
+  
+  /* Unificamos estilos de inputs en móvil */
+  .form-input, .input, .select {
+     padding: 14px; /* Dedos más grandes */
+     font-size: 16px; /* Evita zoom en iOS */
+  }
 
-.site-footer__sep {
-  margin: 0;
-  color: var(--c-secondary);
-  font-weight: 1000;
-  font-size: 1.1em;
-}
-
-/* Alertas */
-.alert {
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: 1px solid;
-}
-
-.alert-Exito {
-    background: #f0fdf4;
-    color: #15803d;
-    border-color: #bbf7d0;
-}
-
-.alert-Error {
-    background: #fef2f2;
-    color: #dc2626;
-    border-color: #fecaca;
-}
-
-.alert-Advertencia {
-    background: #fffbeb;
-    color: #d97706;
-    border-color: #fde68a;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-@media (max-width: 520px) {
   .site-footer__inner {
     flex-direction: column;
     text-align: center;
   }
-}
-
-@media (max-width: 640px) {
-    .panel,
-    .panel-table {
-        margin: 0 0.5rem;
-    }
-    
-    .page-title {
-        font-size: 1.5rem !important;
-    }
-    
-    .page-subtitle {
-        font-size: 0.875rem !important;
-    }
-    
-    .panel__inner {
-        padding: 1.5rem !important;
-    }
-    
-    .form-input-custom,
-    .input-field,
-    .input,
-    .select {
-        padding: 0.75rem;
-        font-size: 1rem;
-    }
-    
-    .btn-primary,
-    .btn-custom {
-        width: 100%;
-        padding: 1rem;
-    }
-    
-    .legal-content p {
-        text-align: left;
-        font-size: 0.875rem;
-    }
-    
-    .legal-content h3 {
-        font-size: 1.25rem;
-    }
-    
-    .legal-content h4 {
-        font-size: 1.125rem;
-    }
-}
-.job-card {
-    background: var(--c-surface);
-    border: var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    cursor: pointer;
-}
-
-.job-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    border-color: var(--c-secondary);
-}
-
-.job-card__title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--c-primary);
-    margin-bottom: 8px;
-    line-height: 1.3;
-}
-
-.job-card__meta {
-    font-size: 13px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 12px;
-}
-
-.job-card__footer {
-    margin-top: auto;
-    padding-top: 15px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }

@@ -169,7 +169,6 @@ const card = (e) => {
       totalText.textContent = "Ups, algo ha salido mal";
     }
   }
-
   async function cargarLocalidades() {
     selLoc.disabled = true;
     selLoc.innerHTML = `<option value="">Cargando…</option>`;

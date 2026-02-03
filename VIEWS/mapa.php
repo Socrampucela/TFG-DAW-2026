@@ -8,56 +8,70 @@ $empleos = (new EmpleoDAO($conn))->obtenerTodos();
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php include_once '../includes/header.php'; ?>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa de Empleos</title>
-    
+    <?php include_once '../includes/header.php'; ?>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    
     <style>
+        /* Estilos unificados para el mapa */
+        #map { 
+            width: 100%; 
+            height: 70vh; /* Ocupa el 70% de la altura de la pantalla */
+            min-height: 400px; 
+            max-height: 800px;
+            background: #eee; 
+            border-bottom: 1px solid #ccc;
+            z-index: 10; 
+        }
+        @media (max-width: 640px) {
+            #map { 
+                height: 50vh !important; 
+                min-height: 350px;
+            }
 
-    #map { 
-        width: 100%; 
-        height: 60vh;
-        min-height: 350px; 
-        max-height: 700px;
-        background: #eee; 
-        border-bottom: 1px solid #ccc; 
-    }
+            .leaflet-popup-content { 
+                font-size: 14px; 
+                width: 180px !important; 
+                text-align: center;
+            }
+        }
 
-    @media (max-width: 640px) {
-        #map { height: 50vh; }
+        /* Estilo para el botón dentro del popup */
+        .popup-link {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 12px;
+            background-color: #2563eb;
+            color: white !important;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 
-        .leaflet-popup-content { font-size: 14px; width: 160px !important; }
-    }
-</style>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-
-    <style>
-        #map { width: 100%; height: 500px; background: #eee; border: 1px solid #ccc; }
-    </style>
 </head>
-<body>
+<body class="bg-gray-50">
 
     <div id="map"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("--- INICIANDO DEBUG DEL MAPA ---");
+            console.log("--- INICIANDO MAPA DE EMPLEOS ---");
 
             const datos = <?php echo json_encode($empleos ?? []); ?>;
-            console.log("Datos recibidos de PHP:", datos);
-
+            
             if (!datos || datos.length === 0) {
-                console.error("¡ERROR! No hay datos. Revisa tu consulta SQL.");
+                console.error("No se encontraron datos de empleos.");
                 return;
             }
 
-            // 2. Iniciamos el mapa
-            // Centrado en España aprox
-            const mapa = L.map('map').setView([40.416, -3.703], 6); 
+            const mapa = L.map('map').setView([41.65, -4.72], 7); 
             
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap'
@@ -70,27 +84,21 @@ $empleos = (new EmpleoDAO($conn))->obtenerTodos();
 
                 let latRaw = e.Latitud || e.latitud || e.LATITUD; 
                 let lonRaw = e.Longitud || e.longitud || e.LONGITUD;
-                let titulo = e.Título || e.titulo || e.TITULO || "Oferta sin título";
-                let url = e['Enlace al contenido'] || e['enlace'] || '#';
-
-                // Depuración del primer elemento para ver qué claves llegan
-                if (index === 0) {
-                    console.log("Primer registro crudo:", e);
-                    console.log("Intentando leer latitud:", latRaw);
-                }
+                let titulo = e.Título || e.titulo || "Oferta de Empleo";
+                let url = e['Enlace al contenido'] || e['Enlace al contenido '] || '#';
 
                 if (latRaw && lonRaw) {
-                    // Convertir "41,65" a "41.65" y a número
+
                     let lat = parseFloat(String(latRaw).replace(',', '.'));
                     let lon = parseFloat(String(lonRaw).replace(',', '.'));
 
                     if (!isNaN(lat) && !isNaN(lon) && lat !== 0) {
                         const marker = L.marker([lat, lon]);
-                        
+
                         marker.bindPopup(`
-                            <div style="text-align:center;">
-                                <b>${titulo}</b><br>
-                                <a href="${url}" target="_blank">Ver oferta</a>
+                            <div class="p-2">
+                                <h3 style="margin:0 0 8px 0; font-size:16px;">${titulo}</h3>
+                                <a href="${url}" target="_blank" class="popup-link">Ver detalles</a>
                             </div>
                         `);
                         
@@ -100,17 +108,17 @@ $empleos = (new EmpleoDAO($conn))->obtenerTodos();
                 }
             });
 
-            console.log("Marcadores añadidos al mapa:", marcadoresValidos);
-
-            // 5. Añadir clusters al mapa
             mapa.addLayer(markersGroup);
-            
-            // Truco: Si hay marcadores, ajusta el zoom para verlos todos
             if (marcadoresValidos > 0) {
-                mapa.fitBounds(markersGroup.getBounds());
+                mapa.fitBounds(markersGroup.getBounds(), { padding: [20, 20] });
             }
+
+            setTimeout(() => {
+                mapa.invalidateSize();
+            }, 500);
         });
     </script>
+
     <?php include_once '../includes/footer.php'; ?>
 </body>
 </html>

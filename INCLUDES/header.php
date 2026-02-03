@@ -111,6 +111,9 @@ if (!function_exists('esAdmin')) {
                             <a href="ofertas.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 transition">
                                 Gestionar empleos
                             </a>
+                            <a href="usuarios.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 transition">
+                                Gestionar usuarios
+                            </a>
                         <?php endif; ?>
 
                         <hr class="my-1 border-gray-100">
@@ -121,20 +124,19 @@ if (!function_exists('esAdmin')) {
                 </div>
 
             <?php else: ?>
-                <!-- Entrar (texto) -->
+
                 <a href="login.php"
                    class="hidden sm:inline-flex text-white/80 hover:text-white font-semibold text-sm transition-colors">
                     Entrar
                 </a>
 
-                <!-- Registrarse (botón como captura) -->
                 <a href="register.php"
                    class="inline-flex items-center justify-center rounded-xl bg-[#2EA8FF] hover:brightness-110 text-white font-bold text-sm px-4 py-2 transition shadow-sm">
                     Registrarse
                 </a>
             <?php endif; ?>
 
-            <!-- Hamburguesa -->
+
             <button id="menu-btn"
                     class="md:hidden p-2 text-white/90 hover:bg-white/10 rounded-xl transition-colors focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">

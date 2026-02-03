@@ -1,16 +1,30 @@
 <?php
-include "../INCLUDES/header.php";
-require_once "../CONFIG/db.php"; 
+session_start();
 
-if(isset($_SESSION['nombre'])){ ?>
+if (!isset($_SESSION['nombre'])) {
+    header("Location: index.php?error=login_required");
+    exit();
+}
+
+require_once "../CONFIG/db.php"; 
+include "../INCLUDES/header.php";
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Empleo</title>
+    <style>
+        @media (max-width: 640px) {
+            main { padding: 1rem !important; }
+            .panel { max-width: 100% !important; margin: 0 !important; }
+            .page-title { font-size: 1.5rem !important; }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[var(--c-bg)]">
+
 <main class="flex-grow flex justify-center items-start py-10 px-4">
     <section class="panel" style="width:100%; max-width:520px;">
         <div class="panel__inner">
@@ -64,19 +78,7 @@ if(isset($_SESSION['nombre'])){ ?>
         </div>
     </section>
 </main>
-<?php
-} else {
-    header("Location:index.php?error=login_required");
-}
-include "../INCLUDES/footer.php";
-?>    
+
+<?php include "../INCLUDES/footer.php"; ?>    
 </body>
 </html>
-<main class="flex-grow flex justify-center items-start py-10 px-4">
-    <style>
-        @media (max-width: 640px) {
-            main { padding: 1rem !important; }
-            .panel { max-width: 100% !important; margin: 0 !important; }
-            .page-title { font-size: 1.5rem !important; }
-        }
-    </style>

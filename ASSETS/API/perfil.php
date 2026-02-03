@@ -2,172 +2,172 @@
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 
-require_once '../../config/db.php';
-require_once '../../classes/usuario.php';
-require_once '../../DAO/usuarioDAO.php';
-
-function out($ok, $message = "", $data = []) {
-  echo json_encode(["ok" => $ok, "message" => $message, "data" => $data], JSON_UNESCAPED_UNICODE);
-  exit();
+if (empty($_SESSION["logueado"]) || empty($_SESSION["usuario_id"])) {
+  http_response_code(401);
+  echo json_encode(["ok" => false, "error" => "No autorizado."]);
+  exit;
 }
 
-if (empty($_SESSION["logueado"]) || empty($_SESSION["usuario_id"]) || empty($_SESSION["email"])) {
-  out(false, "No autorizado.");
+require_once("../../config/db.php");
+require_once("../../DAO/usuarioDAO.php");
+
+function out($code, $arr) {
+  http_response_code($code);
+  echo json_encode($arr);
+  exit;
 }
 
-$action = $_POST["action"] ?? "";
-$userId = (int)$_SESSION["usuario_id"];
-
-$usuarioDAO = new UsuarioDAO($conn);
-
-// Helpers códigos (session)
-function makeCode(): string {
-  return str_pad((string)random_int(0, 999999), 6, "0", STR_PAD_LEFT);
-}
-function setVerifySession(string $type, array $extra = []): string {
-  $code = makeCode();
-  $_SESSION["verify"] = [
-    "type" => $type,
-    "hash" => password_hash($code, PASSWORD_DEFAULT),
-    "exp"  => time() + 600, // 10 min
-    "extra"=> $extra
-  ];
-  return $code;
-}
-function verifyCode(string $code, string $type): array {
-  $v = $_SESSION["verify"] ?? null;
-  if (!$v || ($v["type"] ?? "") !== $type) return [false, "No hay verificación pendiente."];
-  if (($v["exp"] ?? 0) < time()) return [false, "El código ha caducado."];
-  if (!password_verify($code, $v["hash"] ?? "")) return [false, "Código incorrecto."];
-  return [true, $v];
-}
-function sendMailCode(string $to, string $subject, string $body): bool {
-  $headers = "MIME-Version: 1.0\r\n";
-  $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-  $headers .= "From: no-reply@tu-dominio.com\r\n";
-  return @mail($to, $subject, $body, $headers);
+function validEmail($email) {
+  return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
-if ($action === "change_name") {
-  $nombre = trim($_POST["nombre_apellido"] ?? "");
-  if (mb_strlen($nombre) < 2 || mb_strlen($nombre) > 100) out(false, "Nombre inválido.");
+$raw = file_get_contents("php://input");
+$data = json_decode($raw, true);
 
-  $ok = $usuarioDAO->actualizar($userId, ["nombre_apellido" => $nombre]);
-  if (!$ok) out(false, "No se pudo actualizar el nombre.");
-
-  $_SESSION["nombre"] = $nombre;
-  out(true, "Nombre actualizado correctamente.");
+if (!is_array($data)) {
+  out(400, ["ok" => false, "error" => "JSON inválido."]);
 }
 
-if ($action === "request_email_change") {
-  $newEmail = trim($_POST["new_email"] ?? "");
-  if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) out(false, "Email nuevo inválido.");
+$accion = $data["accion"] ?? "";
+$usuarioId = (int)$_SESSION["usuario_id"];
 
-  $currentEmail = (string)$_SESSION["email"];
-  if (strcasecmp($newEmail, $currentEmail) === 0) out(false, "El nuevo email no puede ser igual al actual.");
+try {
+  $dao = new UsuarioDAO($conn);
 
-  if ($usuarioDAO->emailExiste($newEmail, $userId)) out(false, "Ese email ya está registrado.");
+  // Usuario actual (para email actual y comparación)
+  $u = $dao->obtenerPorId($usuarioId);
+  if (!$u) {
+    out(404, ["ok" => false, "error" => "Usuario no encontrado."]);
+  }
+  $emailActual = (string)($u["email"] ?? "");
 
-  $code = setVerifySession("email_change", ["new_email" => $newEmail]);
+  // ---------------------------------------------------
+  // START_UPDATE: guardar cambios pendientes + enviar mail
+  // ---------------------------------------------------
+  if ($accion === "start_update") {
+    $nombre = trim((string)($data["nombre"] ?? ""));
+    $emailNuevo = trim((string)($data["email"] ?? ""));
+    $password = (string)($data["password"] ?? "");
 
-  $to = $currentEmail; // email original
-  $subject = "Código de verificación - cambio de email";
-  $body = "Tu código de verificación es: $code\n\nCaduca en 10 minutos.\nSi no has solicitado este cambio, ignora este mensaje.";
+    // Validaciones
+    if ($nombre === "" || mb_strlen($nombre) < 2 || mb_strlen($nombre) > 80) {
+      out(422, ["ok" => false, "error" => "El nombre debe tener entre 2 y 80 caracteres."]);
+    }
 
-  $sent = sendMailCode($to, $subject, $body);
-  if (!$sent) {
-    // En XAMPP esto es bastante común
-    out(false, "No se pudo enviar el email (mail() no está configurado en este entorno).");
+    if ($emailNuevo !== "" && !validEmail($emailNuevo)) {
+      out(422, ["ok" => false, "error" => "Email no válido."]);
+    }
+
+    // ✅ Contraseña: MISMA restricción que en comprobarRegistro.js (mínimo 6)
+    if ($password !== "" && mb_strlen($password) < 6) {
+      out(422, ["ok" => false, "error" => "La contraseña debe tener al menos 6 caracteres."]);
+    }
+
+    // Construir cambios pendientes SOLO si cambian
+    $pending = [];
+
+    if ($nombre !== (string)($u["nombre_apellido"] ?? "")) {
+      $pending["nombre_apellido"] = $nombre;
+    }
+
+    if ($emailNuevo !== "" && $emailNuevo !== $emailActual) {
+      $pending["email"] = $emailNuevo;
+    }
+
+    if ($password !== "") {
+      // UsuarioDAO->actualizar ya se encarga de hashear si está implementado así
+      $pending["password"] = $password;
+    }
+
+    if (empty($pending)) {
+      out(200, ["ok" => false, "error" => "No hay cambios que guardar."]);
+    }
+
+    // Generar código (6 dígitos) y guardar en sesión (10 min)
+    $code = random_int(100000, 999999);
+    $_SESSION["perfil_pending"] = $pending;
+    $_SESSION["perfil_code"] = (string)$code;
+    $_SESSION["perfil_exp"] = time() + 600;
+
+    // Enviar mail al email ACTUAL
+    $subject = "Código de verificación para cambios de perfil";
+    $message = "Hola,\n\nTu código de verificación es: $code\n\nCaduca en 10 minutos.\n\nSi no has solicitado estos cambios, ignora este correo.";
+    $headers = "From: no-reply@tudominio.com\r\n" .
+               "Content-Type: text/plain; charset=UTF-8\r\n";
+
+    $sent = @mail($emailActual, $subject, $message, $headers);
+
+    if (!$sent) {
+      unset($_SESSION["perfil_pending"], $_SESSION["perfil_code"], $_SESSION["perfil_exp"]);
+      out(500, ["ok" => false, "error" => "No se pudo enviar el correo de verificación."]);
+    }
+
+    out(200, ["ok" => true, "step" => "code", "msg" => "Código enviado al email actual."]);
   }
 
-  out(true, "Código enviado al email actual.");
-}
+  // ---------------------------------------------------
+  // CONFIRM_UPDATE: validar código + aplicar cambios
+  // ---------------------------------------------------
+  if ($accion === "confirm_update") {
+    $code = trim((string)($data["code"] ?? ""));
 
-if ($action === "confirm_email_change") {
-  $code = trim($_POST["code"] ?? "");
-  if (!preg_match('/^\d{6}$/', $code)) out(false, "Código inválido.");
+    if (!preg_match('/^\d{6}$/', $code)) {
+      out(422, ["ok" => false, "error" => "El código debe tener 6 dígitos."]);
+    }
 
-  [$ok, $v] = verifyCode($code, "email_change");
-  if (!$ok) out(false, $v);
+    $sessCode = $_SESSION["perfil_code"] ?? null;
+    $exp = (int)($_SESSION["perfil_exp"] ?? 0);
+    $pending = $_SESSION["perfil_pending"] ?? null;
 
-  $newEmail = $v["extra"]["new_email"] ?? "";
-  if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) out(false, "Email nuevo inválido.");
+    if (!$sessCode || !$pending || !is_array($pending)) {
+      out(400, ["ok" => false, "error" => "No hay cambios pendientes de confirmar."]);
+    }
 
-  if ($usuarioDAO->emailExiste($newEmail, $userId)) out(false, "Ese email ya está registrado.");
+    if (time() > $exp) {
+      unset($_SESSION["perfil_pending"], $_SESSION["perfil_code"], $_SESSION["perfil_exp"]);
+      out(400, ["ok" => false, "error" => "El código ha caducado."]);
+    }
 
-  $upd = $usuarioDAO->actualizar($userId, ["email" => $newEmail]);
-  if (!$upd) out(false, "No se pudo actualizar el email.");
+    if (!hash_equals((string)$sessCode, (string)$code)) {
+      out(400, ["ok" => false, "error" => "Código incorrecto."]);
+    }
 
-  $_SESSION["email"] = $newEmail;
-  unset($_SESSION["verify"]);
+    $ok = $dao->actualizar($usuarioId, $pending);
 
-  out(true, "Email actualizado correctamente.");
-}
+    unset($_SESSION["perfil_pending"], $_SESSION["perfil_code"], $_SESSION["perfil_exp"]);
 
-if ($action === "request_password_change") {
-  $currentPass = $_POST["current_password"] ?? "";
-  $newPass = $_POST["new_password"] ?? "";
+    if (!$ok) {
+      out(500, ["ok" => false, "error" => "No se pudieron aplicar los cambios."]);
+    }
 
-  if (!$currentPass || !$newPass) out(false, "Faltan datos.");
-  if (strlen($newPass) < 8) out(false, "La nueva contraseña debe tener al menos 8 caracteres.");
+    // Leer usuario actualizado para devolver UI
+    $updated = $dao->obtenerPorId($usuarioId);
 
-  // Verificar contraseña actual contra el hash guardado en BBDD
-  $usuario = $usuarioDAO->buscarPorEmail((string)$_SESSION["email"]);
-  if ($usuario === null) out(false, "Usuario no encontrado.");
-  if (!password_verify($currentPass, $usuario->getPassword())) out(false, "Contraseña actual incorrecta.");
-
-  // Guardamos HASH en sesión (no la contraseña en claro)
-  $newHash = password_hash($newPass, PASSWORD_DEFAULT);
-
-  $code = setVerifySession("password_change", ["new_hash" => $newHash]);
-
-  $to = (string)$_SESSION["email"]; // email original
-  $subject = "Código de verificación - cambio de contraseña";
-  $body = "Tu código de verificación es: $code\n\nCaduca en 10 minutos.\nSi no has solicitado este cambio, ignora este mensaje.";
-
-  $sent = sendMailCode($to, $subject, $body);
-  if (!$sent) out(false, "No se pudo enviar el email (mail() no está configurado en este entorno).");
-
-  out(true, "Código enviado al email actual.");
-}
-
-if ($action === "confirm_password_change") {
-  $code = trim($_POST["code"] ?? "");
-  if (!preg_match('/^\d{6}$/', $code)) out(false, "Código inválido.");
-
-  [$ok, $v] = verifyCode($code, "password_change");
-  if (!$ok) out(false, $v);
-
-  $newHash = $v["extra"]["new_hash"] ?? "";
-  if (!$newHash) out(false, "No hay contraseña pendiente.");
-
-  // Actualizar directamente el hash (para no re-hashear)
-  try {
-    $stmt = $conn->prepare("UPDATE usuarios SET password = :p WHERE id = :id");
-    $stmt->execute([":p" => $newHash, ":id" => $userId]);
-  } catch (Throwable $e) {
-    out(false, "No se pudo actualizar la contraseña.");
+    out(200, [
+      "ok" => true,
+      "msg" => "Cambios aplicados correctamente.",
+      "nombre" => $updated["nombre_apellido"] ?? null,
+      "email"  => $updated["email"] ?? null
+    ]);
   }
 
-  unset($_SESSION["verify"]);
-  out(true, "Contraseña actualizada correctamente.");
+  // ---------------------------------------------------
+  // DELETE: borrado directo (sin mail)
+  // ---------------------------------------------------
+  if ($accion === "delete") {
+    $ok = $dao->eliminar($usuarioId);
+
+    if (!$ok) {
+      out(500, ["ok" => false, "error" => "No se pudo eliminar la cuenta."]);
+    }
+
+    session_destroy();
+    out(200, ["ok" => true, "msg" => "Cuenta eliminada correctamente."]);
+  }
+
+  out(400, ["ok" => false, "error" => "Acción no válida."]);
+
+} catch (Throwable $e) {
+  out(500, ["ok" => false, "error" => "Error interno."]);
 }
-
-if ($action === "delete_account") {
-  $pass = $_POST["password"] ?? "";
-  if (!$pass) out(false, "Falta la contraseña.");
-
-  $usuario = $usuarioDAO->buscarPorEmail((string)$_SESSION["email"]);
-  if ($usuario === null) out(false, "Usuario no encontrado.");
-  if (!password_verify($pass, $usuario->getPassword())) out(false, "Contraseña incorrecta.");
-
-  $ok = $usuarioDAO->eliminar($userId);
-  if (!$ok) out(false, "No se pudo eliminar la cuenta.");
-
-  session_destroy();
-  out(true, "Cuenta eliminada.");
-}
-
-out(false, "Acción no válida.");
-
 

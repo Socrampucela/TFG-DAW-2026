@@ -24,6 +24,10 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 ?>
 <!doctype html>
 <html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 
 <body class="min-h-screen bg-gray-50">
@@ -49,58 +53,63 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
     <!-- “Display” tipo tabla como tu captura -->
     <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full text-left">
-          <thead class="bg-gray-50 text-xs uppercase tracking-wide text-gray-600">
-            <tr>
-              <th class="px-6 py-4">Nombre</th>
-              <th class="px-6 py-4">Email</th>
-              <th class="px-6 py-4">Rol</th>
-              <th class="px-6 py-4">Fecha</th>
-              <th class="px-6 py-4 text-right">Acciones</th>
-            </tr>
-          </thead>
+  <div class="overflow-x-auto">
+    <table class="w-full min-w-[900px] table-fixed text-left">
+      <thead class="bg-gray-50 text-xs uppercase tracking-wide text-gray-600">
+        <tr>
+          <th class="px-6 py-4 w-[26%]">Nombre</th>
+          <th class="px-6 py-4 w-[30%]">Email</th>
+          <th class="px-6 py-4 w-[16%]">Rol</th>
+          <th class="px-6 py-4 w-[16%]">Fecha</th>
+          <th class="px-6 py-4 w-[12%] text-right">Acciones</th>
+        </tr>
+      </thead>
 
-          <tbody class="divide-y divide-gray-100">
-            <tr class="hover:bg-gray-50/60">
-              <!-- Click en nombre -> modal cambiar nombre -->
-              <td class="px-6 py-5 font-medium">
-                <button id="btnOpenNombre"
-                        class="underline decoration-dotted underline-offset-4 hover:text-black text-gray-800"
-                        type="button"
-                        title="Cambiar nombre">
-                  <?= h($u["nombre_apellido"]) ?>
-                </button>
-              </td>
+      <tbody class="divide-y divide-gray-100">
+        <tr class="hover:bg-gray-50/60 align-middle">
+          <td class="px-6 py-5 font-medium text-gray-800 whitespace-nowrap" id="tdNombre">
+            <?= h($u["nombre_apellido"]) ?>
+          </td>
 
-              <td class="px-6 py-5 text-gray-700"><?= h($u["email"]) ?></td>
-              <td class="px-6 py-5 text-gray-700"><?= h($u["rol"]) ?></td>
-              <td class="px-6 py-5 text-gray-700"><?= h(substr((string)$u["fecha_registro"], 0, 10)) ?></td>
+          <td class="px-6 py-5 text-gray-700 whitespace-nowrap" id="tdEmail">
+            <?= h($u["email"]) ?>
+          </td>
 
-              <td class="px-6 py-5">
-                <div class="flex items-center justify-end gap-3">
-                  <!-- Cambiar email -->
-                  <button id="btnOpenEmail" class="p-2 rounded-md hover:bg-gray-100" type="button" title="Cambiar email">
-                    ✉️
-                  </button>
+          <td class="px-6 py-5 text-gray-700 whitespace-nowrap">
+            <?= h($u["rol"]) ?>
+          </td>
 
-                  <!-- Cambiar contraseña -->
-                  <button id="btnOpenPass" class="p-2 rounded-md hover:bg-gray-100" type="button" title="Cambiar contraseña">
-                    🔑
-                  </button>
+          <td class="px-6 py-5 text-gray-700 whitespace-nowrap">
+            <?= h(substr((string)$u["fecha_registro"], 0, 10)) ?>
+          </td>
 
-                  <!-- Eliminar cuenta -->
-                  <button id="btnOpenDelete" class="p-2 rounded-md hover:bg-gray-100 text-red-600" type="button" title="Eliminar cuenta">
-                    🗑️
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
+          <td class="px-6 py-5">
+            <div class="flex items-center justify-end gap-2">
+              <!-- Editar perfil -->
+              <button id="btnEditPerfil"
+                      class="p-2 rounded-md hover:bg-gray-100"
+                      type="button"
+                      title="Editar perfil"
+                      aria-label="Editar perfil">
+                ✏️
+              </button>
 
-        </table>
-      </div>
-    </section>
+              <!-- Eliminar cuenta -->
+              <button id="btnDeletePerfil"
+                      class="p-2 rounded-md hover:bg-gray-100 text-red-600"
+                      type="button"
+                      title="Eliminar cuenta"
+                      aria-label="Eliminar cuenta">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
   </main>
 
   <!-- MODAL base -->
@@ -126,7 +135,8 @@ function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
   <script>
   window.__PERFIL_API__ = "../ASSETS/API/perfil.php";
 </script>
-  <script src="../ASSETS/js/perfil.js"></script>
+  <script src="../ASSETS/js/perfil.js?v=1" defer></script>
+
     
    
 </body>
